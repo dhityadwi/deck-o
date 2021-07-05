@@ -1,0 +1,143 @@
+.your-deck {
+  margin: 120px 150px;
+  gap: 20px;
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .deck-title {
+      width: 558px;
+      display: flex;
+      flex-direction: column;
+      h5 {
+        padding-bottom: 8px;
+      }
+
+      .bar {
+        margin-top: 20px;
+        width: 558px;
+        height: 11px;
+        background: #c78ef7;
+        border-radius: 22px;
+        margin-bottom: 20px;
+      }
+      .off {
+        background: #e1e1e1;
+      }
+      .detail {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+
+        .number {
+          background: #f3f3f3;
+          width: 20px;
+          text-align: center;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .deck-details {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    .form {
+      display: flex;
+      margin-top: 30px;
+      justify-content: space-between;
+      .left-form {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        input {
+          width: 558px;
+          height: 52px;
+          border-radius: 26px;
+          border: 3px solid #f3f3f3;
+        }
+        select {
+          width: 558px;
+          height: 52px;
+          border-radius: 26px;
+          border: 3px solid #f3f3f3;
+        }
+
+        .color-tag {
+          margin-top: 20px;
+          .circle-box {
+            display: flex;
+            gap: 20px;
+            .circle {
+              margin-top: 10px;
+              width: 50px;
+              height: 50px;
+              background: red;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+      .right-form {
+        textarea {
+          width: 555px;
+          height: 266px;
+          border-radius: 26px;
+          resize: none;
+          border: 3px solid #f3f3f3;
+          font-size: 20px;
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+  .button-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 100px;
+    button {
+      background: #e6c7ff;
+      border-radius: 28.5px;
+      width: 249px;
+      height: 61px;
+      border: none;
+    }
+  }
+}
+
+.terms {
+  margin-top: 100px;
+  .terms-container {
+    width: 1140px;
+    height: 160px;
+    border-radius: 26px;
+    border: 3px solid #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .term-input {
+      display: flex;
+      flex-direction: column;
+
+      input[type="text"] {
+        width: 500px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 26px;
+        border: 3px solid #f3f3f3;
+      }
+      input[type="file"] {
+        width: 80px;
+      }
+    }
+  }
+  .add-deck-btn {
+    text-align: center;
+  }
+}

@@ -1,0 +1,38 @@
+$btn-border-radius: 500px;
+
+.container {
+  .btn {
+    border-radius: $btn-border-radius;
+  }
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  background-color: #ddf4ff;
+}
+
+#projects {
+  background-color: #ddf4ff;
+}
+
+section {
+  padding-top: 5rem;
+}
+
+p {
+  color: #ab6fdc;
+}
+
+.footer-container {
+  .footer-links {
+    .footer-link-wrapper {
+      .footer-link-items {
+        background-color: #ab6fdc;
+
+        a {
+          background-color: $indigo-300;
+        }
+      }
+    }
+  }
+}
