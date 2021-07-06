@@ -1,0 +1,30 @@
+.bg-purple{
+  background-color: #AB6FDC !important;
+}
+
+.isactive{
+    border-bottom: 5px solid #FCD888;
+    padding: 10px 10px;
+}
+.inactive{
+    border-bottom: 5px solid #AB6FDC;
+    padding: 10px 10px;
+}
+
+.navbar .navbar .nav-item .nav-link{
+  color: #fff;
+}
+
+.border-bottom-purple{
+  border-bottom: 5px solid #AB6FDC;
+}
+
+.answer-false{
+  background-color: #FF8749;
+    color: #fff;
+}
+
+.answer-true{
+  background-color: #70BFA5;
+    color: #fff;
+}

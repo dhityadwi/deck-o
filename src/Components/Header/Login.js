@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import GoogleLogin from "react-google-login";
-import ModalLogin from "react-modal";
+import React, { useEffect, useState } from 'react';
+import GoogleLogin from 'react-google-login';
+import ModalLogin from 'react-modal';
 
-import "../../assets/styles/Login.scss";
-import ReactFacebookLogin from "react-facebook-login";
-import fb from "../../assets/img/fb.png";
-import { useDispatch, useSelector } from "react-redux";
-import jwt_decode from "jwt-decode";
-import { isLogin } from "../../redux/action/loginAction";
-import { useHistory } from "react-router-dom";
-import { loginUser } from "../../service/userService";
-import Register from "./Register";
+import '../../assets/styles/Login.scss';
+import ReactFacebookLogin from 'react-facebook-login';
+import fb from '../../assets/img/fb.png';
+import { useDispatch, useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';
+import { isLogin } from '../../redux/action/loginAction';
+import { useHistory } from 'react-router-dom';
+import { loginUser } from '../../service/userService';
+import Register from './Register';
 
-ModalLogin.setAppElement("#root");
+ModalLogin.setAppElement('#root');
 
 const Login = () => {
   const [loginModal, setLoginModal] = useState(false);
 
-  const [inputPass, setInputPass] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
+  const [inputPass, setInputPass] = useState('');
+  const [inputEmail, setInputEmail] = useState('');
 
   const [validationLog, setValidationLog] = useState(false);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const Login = () => {
         console.log(response);
 
         const decode = jwt_decode(token);
-        store.setItem("token", JSON.stringify(token));
+        store.setItem('token', JSON.stringify(token));
 
         const { statusCode } = response;
         dispatch(
@@ -70,8 +70,8 @@ const Login = () => {
   useEffect(() => {
     if (loginStat === 200) {
       setLoginModal(false);
-      historyHome.push("/home");
-    } else if (loginStat === "") {
+      historyHome.push('/home');
+    } else if (loginStat === '') {
       setValidationLog(false);
     } else {
       setValidationLog(true);
@@ -125,7 +125,7 @@ const Login = () => {
               Login
             </button>
             <p>
-              Don't have an account?{" "}
+              Don't have an account?{' '}
               <a
                 href="/#"
                 // onClick={() => {
@@ -136,7 +136,7 @@ const Login = () => {
                 <span>
                   <Register />
                 </span>
-              </a>{" "}
+              </a>{' '}
             </p>
           </form>
         </div>

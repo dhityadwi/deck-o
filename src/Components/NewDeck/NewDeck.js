@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import './newdeck.scss';
+import { FiCheck, FiPlusCircle } from 'react-icons/fi';
 import circleAdd from '../../assets/img/mdi_plus-circle.png';
+
+import NewCard from '../NewCard/NewCard';
 
 const YourDeck = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState('');
+  const [colorTag, setColorTag] = useState('');
   const [showListTerm, setShowListTerm] = useState(false);
 
   const options = [
@@ -17,9 +20,25 @@ const YourDeck = () => {
     { name: 'Philosophy', value: 'Philosophy' },
   ];
 
+  const [activecolor, setActiveColor] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const arrayColor = ['#F4AA27', '#AB6FDC', '#FF8264', '#539D85', '#6884F5'];
+  const colors = [
+    [true, false, false, false, false],
+    [false, true, false, false, false],
+    [false, false, true, false, false],
+    [false, false, false, true, false],
+    [false, false, false, false, true],
+  ];
+
   const handleNext = () => {
     setShowListTerm(true);
-    console.log(title, description, category);
+    console.log(title, description, category, colorTag);
   };
 
   const handleSubmit = () => {};
@@ -36,7 +55,7 @@ const YourDeck = () => {
           </div>
         </div>
         <div className="deck-title">
-          <h5>Saved just now</h5>
+          <h3>Saved just now</h3>
           <div className={`bar ${showListTerm ? '' : 'off'} `}></div>
           <div className="detail">
             <div className="number">2</div>
@@ -71,11 +90,19 @@ const YourDeck = () => {
               <div className="color-tag">
                 <p>Color Tag</p>
                 <div className="circle-box">
-                  <div className="circle"></div>
-                  <div className="circle"></div>
-                  <div className="circle"></div>
-                  <div className="circle"></div>
-                  <div className="circle"></div>
+                  {arrayColor.map((item, index) => (
+                    <button
+                      className="circle"
+                      key={index}
+                      onClick={() => {
+                        setActiveColor(colors[index]);
+                        setColorTag(item);
+                      }}
+                      style={{ background: item }}
+                    >
+                      {activecolor[index] ? <FiCheck /> : ''}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -91,24 +118,9 @@ const YourDeck = () => {
           </div>
         </div>
       ) : (
-        <div className="terms">
-          <h3>List of Terms</h3>
-          <div className="terms-container">
-            <div className="term-input">
-              <label htmlFor="">Term</label>
-              <input type="text" className="term" />
-            </div>
-            <div className="term-input">
-              <label htmlFor="">Explanation</label>
-              <input type="text" className="term" />
-            </div>
-            <div className="term-input">
-              <input type="file" className="term" />
-            </div>
-          </div>
-          <div className="add-deck-btn">
-            <img src={circleAdd} alt="" />
-          </div>
+        <div>
+          <h2 style={{ marginTop: '50px' }}>List of Card</h2>
+          <NewCard />
         </div>
       )}
 

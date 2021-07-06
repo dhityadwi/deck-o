@@ -1,11 +1,11 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import deko from "../../assets/img/decko.svg";
-import "./header.scss";
-import user from "../../assets/image/user.svg";
-import folder from "../../assets/image/folder.svg";
-import logout from "../../assets/image/logout.svg";
+import Dropdown from 'react-bootstrap/Dropdown';
+import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import deko from '../../assets/image/logo.png';
+import './header.scss';
+import user from '../../assets/image/user.svg';
+import folder from '../../assets/image/folder.svg';
+import logout from '../../assets/image/logout.svg';
 
 const Header = () => {
   const username = useSelector((state) => state.login.username);
@@ -13,7 +13,7 @@ const Header = () => {
   const historyLanding = useHistory();
 
   const hanldeLogout = () => {
-    historyLanding.push("/");
+    historyLanding.push('/');
     const store = window.localStorage;
     store.clear();
 
@@ -30,14 +30,14 @@ const Header = () => {
         <Link to="/home">
           <li>Home</li>
         </Link>
-        <Link to="/your-decks">
+        <Link to="/home/your-decks">
           <li>All Decks</li>
         </Link>
-        <Link to="/your-decks">
+        <Link to="/home/test">
           <li>Take Test</li>
         </Link>
       </ul>
-      <Link to="/new-deck">
+      <Link to="/home/new-deck">
         <button className="nav__btn">+ New Decks</button>
       </Link>
 
@@ -60,18 +60,28 @@ const Header = () => {
         <Dropdown.Menu className="nav__profile__menu">
           <div className="nav__profile__drop">
             <h4>Hy! {username} </h4>
-            <Dropdown.Item value="account" href="/profile">
-              <img src={user} alt="user" className="nav__profile__drop--icon" />
-              Account
-            </Dropdown.Item>
-            <Dropdown.Item value="mydeck" href="/profile">
-              <img
-                src={folder}
-                alt="folder"
-                className="nav__profile__drop--icon"
-              />
-              My Deck
-            </Dropdown.Item>
+            <Link to="/home/profile/">
+              <Dropdown.Item value="account" href="/home/profile">
+                <img
+                  src={user}
+                  alt="user"
+                  className="nav__profile__drop--icon"
+                />
+                Account
+              </Dropdown.Item>
+            </Link>
+
+            <Link to="/home/profile">
+              <Dropdown.Item value="mydeck">
+                <img
+                  src={folder}
+                  alt="folder"
+                  className="nav__profile__drop--icon"
+                />
+                My Deck
+              </Dropdown.Item>
+            </Link>
+
             <Dropdown.Divider />
             <Dropdown.Item value="logout" onClick={hanldeLogout}>
               <img

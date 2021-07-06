@@ -11,14 +11,179 @@ a {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.form-control-rounded {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #f5f6fa;
+  border-radius: 1.5rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-rounded:focus {
+  border: 1px solid #e84118;
+  border-radius: 1.5rem;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-danger-outline {
+  color: #dc3545;
+  background-color: #fff;
+  border: 1px solid #dc3545;
+}
+
+.parent-class .form-group input[type="text"]:focus,
+.parent-class .form-group [type="text"].form-control:focus {
+  box-shadow: none;
+}
+
+.navbar-category {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.1rem 1rem;
+  border-radius: 5px;
+}
+
+.navbar-danger .navbar-nav {
+  display: flex;
+  flex-direction: row;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.navbar-danger .navbar-nav .nav-item .nav-link {
+  color: #fff;
+}
+
+.navbar-danger .navbar-nav .nav-item {
+  padding-right: 20px;
+}
+
+.navbar-danger .navbar-nav .show > .nav-link,
+.navbar-danger .navbar-nav .active > .nav-link,
+.navbar-danger .navbar-nav .nav-link.show,
+.navbar-danger .navbar-nav .nav-link.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.image-bottom-radius {
+  border-bottom-left-radius: calc(0.25rem - 1px);
+  border-bottom-right-radius: calc(0.25rem - 1px);
+}
+
+.text-bold-12 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bg-overlay {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(360deg, rgba(2, 0, 36, 0.8309698879551821) 20%, rgba(1, 0, 16, 0.6909138655462185) 80%, rgba(0, 0, 0, 0) 100%);
+}
+
+.bg-overlay-white {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(360deg, rgba(255, 255, 255, 1) 29%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 1) 100%);
+}
+
+.list-active {
+  background-color: red;
+  color: #fff;
+}
+
+.list-group-item {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.read-more {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-image: linear-gradient(to bottom, transparent, #fff);
+  /* text-align: center; 
+  margin: 0; padding: 30px 0;  */
+}
+
+/* Media query */
+
+@media (max-width: 576px) {
+  .center {
+    text-align: center !important;
+  }
+  .font-responsive {
+    font-size: 10px;
+  }
+}
+@media (min-width: 576px) {
+  .center {
+    text-align: center !important;
+  }
+  .font-responsive {
+    font-size: 10px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+  .center {
+    text-align: left !important;
+  }
+  .font-responsive {
+    font-size: 12px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .center {
+    text-align: left !important;
+  }
+  .font-responsive {
+    font-size: 12px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .center {
+    text-align: left !important;
+  }
+  .font-responsive {
+    font-size: 14px;
+  }
+}
+
+.bm-menu:focus {
+  outline: none;
+  border: none;
+}
+.bm-item-list:focus {
+  outline: none;
+  border: none;
 }
