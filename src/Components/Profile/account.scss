@@ -1,0 +1,87 @@
+@import "../../assets/styles/global";
+
+.account {
+  margin-top: 135px;
+  margin-left: 100px;
+  width: 850px;
+
+  & span {
+    font-weight: bold;
+  }
+
+  &__username {
+    &--span {
+      margin-left: 20px;
+    }
+    &--name {
+      border: 0.3px solid #a5a3a3;
+      width: 300px;
+      border-radius: 30px;
+      padding: 5px;
+      & p {
+        margin: 5px;
+        padding-left: 13px;
+      }
+    }
+  }
+
+  &__email {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #a5a3a3;
+    margin-top: 30px;
+    &--title {
+      margin-top: 10px;
+      p {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  &__pass {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #a5a3a3;
+    border-bottom: 1px solid #a5a3a3;
+    &--title {
+      margin-top: 10px;
+      p {
+        margin-top: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__change {
+    @include button-dua;
+    color: #f4aa27;
+    background: #fff0cd;
+    width: 146px;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  &__buton {
+    @include button-dua;
+    color: rgb(255, 255, 255);
+    background: #c78ef7;
+    box-shadow: 0 5px #ab6fdc;
+    width: 246px;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 80vh;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    // position: relative;
+    // left: 79vh;
+  }
+  &__buton:active {
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+  }
+}

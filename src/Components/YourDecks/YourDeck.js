@@ -30,7 +30,7 @@ const YourDecks = () => {
   return (
     <div className="your__deck">
       <div>
-        <h3>Your decks </h3>
+        <h3>All decks </h3>
       </div>
 
       <div className="your__deck__filter">
@@ -43,7 +43,7 @@ const YourDecks = () => {
               Reset
             </div>
           )}
-          <Dropdown.Menu className="your__deck__drop__menu">
+          <Dropdown.Menu className="your__deck__drop__menus">
             {[
               "Mathematics",
               "Computer Science",
@@ -93,7 +93,10 @@ const YourDecks = () => {
               "Most need to recall",
               "Most not studied",
             ].map((item) => (
-              <div key={`default-${item}`} className="your__deck__drop__check">
+              <div
+                key={`default-${item}`}
+                className="your__deck__drop__check--right"
+              >
                 <Dropdown.Item value={item} onClick={() => setSelect(item)}>
                   {item}
                 </Dropdown.Item>

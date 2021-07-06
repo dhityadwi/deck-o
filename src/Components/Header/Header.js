@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import deko from "../../assets/img/decko.svg";
 import "./header.scss";
+import user from "../../assets/image/user.svg";
+import folder from "../../assets/image/folder.svg";
+import logout from "../../assets/image/logout.svg";
 
 const Header = () => {
   const username = useSelector((state) => state.login.username);
@@ -28,7 +31,7 @@ const Header = () => {
           <li>Home</li>
         </Link>
         <Link to="/your-decks">
-          <li>Your Decks</li>
+          <li>All Decks</li>
         </Link>
         <Link to="/your-decks">
           <li>Take Test</li>
@@ -58,11 +61,24 @@ const Header = () => {
           <div className="nav__profile__drop">
             <h4>Hy! {username} </h4>
             <Dropdown.Item value="account" href="/profile">
+              <img src={user} alt="user" className="nav__profile__drop--icon" />
               Account
             </Dropdown.Item>
-            <Dropdown.Item value="category">Category</Dropdown.Item>
+            <Dropdown.Item value="mydeck" href="/profile">
+              <img
+                src={folder}
+                alt="folder"
+                className="nav__profile__drop--icon"
+              />
+              My Deck
+            </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item value="logout" onClick={hanldeLogout}>
+              <img
+                src={logout}
+                alt="logout"
+                className="nav__profile__drop--icon"
+              />
               Logout
             </Dropdown.Item>
           </div>

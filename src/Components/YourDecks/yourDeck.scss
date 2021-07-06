@@ -63,8 +63,20 @@
     &__menu {
       background: #fff;
       padding: 10px;
-      border-radius: 5px;
-      width: 261px;
+      border-radius: 15px !important;
+      width: 200px;
+      border: 1px solid;
+      border: 1px solid rgb(206, 201, 201);
+      & label {
+        margin-left: 7px;
+        font-weight: normal;
+      }
+    }
+    &__menus {
+      background: #fff;
+      padding: 10px;
+      border-radius: 15px !important;
+      width: 240px;
       border: 1px solid;
       border: 1px solid rgb(206, 201, 201);
       & label {
@@ -76,6 +88,10 @@
       margin-bottom: 8px;
       padding-left: 10px;
       padding-top: 10px;
+      &--right {
+        margin-bottom: 8px;
+        padding-top: 10px;
+      }
       a {
         text-decoration: none;
         color: #3e3e3e;

@@ -1,11 +1,11 @@
 import React from "react";
-import Category from "./Category";
+import MyDeck from "./MyDeck";
 import Account from "./Account";
 
 const ProfileDetail = (props) => {
   switch (props.click) {
     case 2:
-      return <Category />;
+      return <MyDeck />;
     default:
       return <Account />;
   }

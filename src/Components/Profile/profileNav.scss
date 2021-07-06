@@ -5,9 +5,41 @@
   margin-left: 100px;
   gap: 20px;
 
+  &__nav {
+    display: flex;
+  }
+
+  &__username {
+    position: relative;
+    top: 10px;
+  }
+
+  &__image {
+    & img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+
   &__menu {
     display: flex;
     flex-direction: column;
     line-height: 65px;
+    &--pilih {
+      & strong {
+        cursor: pointer;
+      }
+      img {
+        margin-right: 10px;
+        margin-bottom: 8px;
+      }
+    }
   }
+}
+
+.containerNav {
+  display: flex;
+  width: max-content;
 }

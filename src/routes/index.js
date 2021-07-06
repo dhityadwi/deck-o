@@ -6,11 +6,13 @@ import NewDeck from "../Pages/NewDeck/NewDeck";
 import EditYourDeck from "../Pages/YourDeckPage/EditYourDeck";
 import LandingPage from "../Pages/LandingPage";
 import ProfilePage from "../Pages/ProfilePage";
+import MyDeck from "../Components/Profile/MyDeck";
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
+        <Route exact path="/profile/my-deck" component={MyDeck}></Route>
         <Route exact path="/profile" component={ProfilePage}></Route>
         <Route exact path="/your-decks" component={YourDeckPage}></Route>
         <Route exact path="/your-decks/edit" component={EditYourDeck}></Route>
