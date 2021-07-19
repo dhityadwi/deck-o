@@ -206,7 +206,7 @@ const Account = () => {
           </button>
         </div>
       </div>
-      <button className="account__buton">Save Changes</button>
+      {/* <button className="account__buton">Save Changes</button> */}
     </div>
   );
 };
