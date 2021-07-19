@@ -6,20 +6,16 @@ export const isPasswordStart = () => {
   };
 };
 
-export const isPassword = (current_password, password) => {
+export const isPassword = () => {
   return {
     type: "PASSWORD",
-    payload: {
-      current_password,
-      password,
-    },
   };
 };
 
 export const isPasswordError = (message) => {
   return {
     type: "PASSWORD/ERROR",
-    paylaod: {
+    payload: {
       message,
     },
   };
@@ -27,7 +23,7 @@ export const isPasswordError = (message) => {
 
 export const passwordAsyn = (current_password, password) => {
   return (dispatch) => {
-    dispatch(isPassword());
+    dispatch(isPasswordStart());
 
     putPassword(current_password, password)
       .then((response) => {

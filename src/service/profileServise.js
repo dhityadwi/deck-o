@@ -35,7 +35,10 @@ export const putProfile = async (username, email) => {
       },
       body: JSON.stringify(data),
     });
-    return response.json();
+    if (response.ok) {
+      return response;
+    }
+    throw new Error("Email or Username already used.");
   } catch (error) {
     throw error;
   }

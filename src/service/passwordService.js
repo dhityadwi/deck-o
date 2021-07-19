@@ -15,7 +15,10 @@ export const putPassword = async (current_password, password) => {
       },
       body: JSON.stringify(data),
     });
-    return response.json();
+    if (response.ok) {
+      return response;
+    }
+    throw new Error("The current password is not the same.");
   } catch (error) {
     throw error;
   }

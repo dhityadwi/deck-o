@@ -12,6 +12,8 @@ import { passwordAsyn } from "../../redux/action/passwordAction";
 const Account = () => {
   const username = useSelector((state) => state.profile.username);
   const email = useSelector((state) => state.profile.email);
+  const { loading, error } = useSelector((state) => state.editProfile);
+  const { loadings, errors } = useSelector((state) => state.password);
   const dispatch = useDispatch();
 
   const [changePassModal, setChangesPassModal] = useState(false);
@@ -133,9 +135,17 @@ const Account = () => {
                   onChange={handleNewEmail}
                 />
 
-                <button className="containerChange__btn" type="submit">
-                  Confirm
-                </button>
+                {error && (
+                  <div className="error-message">
+                    Email or Username already used.
+                  </div>
+                )}
+                {loading && <div className="single5"></div>}
+                {!loading && (
+                  <button className="containerChange__btn" type="submit">
+                    Confirm
+                  </button>
+                )}
               </form>
             </div>
           </ModalChangeEmail>
@@ -176,9 +186,17 @@ const Account = () => {
                   onChange={handleNewPass}
                 />
 
-                <button className="containerChange__btn" type="submit">
-                  Confirm
-                </button>
+                {errors && (
+                  <div className="error-message">
+                    The current password is not the same.
+                  </div>
+                )}
+                {loadings && <div className="single5"></div>}
+                {!loadings && (
+                  <button className="containerChange__btn" type="submit">
+                    Confirm
+                  </button>
+                )}
               </form>
             </div>
           </ModalChangePass>
