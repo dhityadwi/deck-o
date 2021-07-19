@@ -1,12 +1,14 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import Form from 'react-bootstrap/Form';
-import React, { useState, useEffect } from 'react';
-import Deck from '../Deck/Deck';
-import './yourDeck.scss';
-import NoDeckFilter from './NoDeckFilter';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Spinner } from 'reactstrap';
-import { getAllDecks, getDecksCategory } from '../../redux/action/deckAction';
+import Dropdown from "react-bootstrap/Dropdown";
+import Form from "react-bootstrap/Form";
+import React, { useState, useEffect } from "react";
+import Deck from "../Deck/Deck";
+import "./yourDeck.scss";
+import NoDeckFilter from "./NoDeckFilter";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Spinner } from "reactstrap";
+import { getAllDecks, getDecksCategory } from "../../redux/action/deckAction";
+import { filterAsyns } from "../../redux/action/filterAction";
+import { shortAsyns } from "../../redux/action/sortAction";
 
 const YourDecks = () => {
   const { allDecksPagination, loading, deckCategory } = useSelector(
@@ -15,16 +17,24 @@ const YourDecks = () => {
   const dispatch = useDispatch();
   const [checks, setCheck] = useState([]);
   const [view, setView] = useState(false);
-  const [select, setSelect] = useState('Select an Option');
+  const [select, setSelect] = useState("Select an Option");
   const [page, setPage] = useState(2);
   const [tes, setTes] = useState(true);
+
+  const { data, loadingSort } = useSelector((state) => state.sort);
+
+  console.log(data, "ini data sort");
+
+  const [showCate, setShowCate] = useState(false);
+
+  const deckData = data.length === 0 ? allDecksPagination : data;
 
   const clickPagination = () => {
     setPage((prevState) => prevState + 1);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    dispatch(filterAsyns(["60dc7dbd0fa74fdc178694bf"]));
   };
 
   const handleClear = (event) => {
@@ -37,6 +47,7 @@ const YourDecks = () => {
     } else {
       setCheck(checks.filter((item) => item !== event.target.value));
     }
+    console.log(event.target.value, "target value");
   };
 
   useEffect(() => {
@@ -66,32 +77,24 @@ const YourDecks = () => {
                 className="your__deck__drop__check"
               >
                 <Form.Check
-                  onSubmit={handleSubmit}
                   type="checkbox"
-                  value={type.nameCategory}
-                  label={type.nameCategory}
+                  value={type.label}
+                  label={type.label}
                   onChange={handleCheckbox}
-                  checked={checks.includes(type.nameCategory)}
+                  checked={checks.includes(type.label)}
                 />
               </div>
             ))}
 
-            {/* {deckCategory.map((item) => 
-               <div key={`default-${item.nameCategory}`} className="your__deck__drop__check">
-               <Form.Check
-                 onSubmit={handleSubmit}
-                 type="checkbox"
-                 value={item._id}
-                 label={item.nameCategory}
-                 onChange={handleCheckbox}
-                 checked={checks.includes(type)}
-               />
-            )} */}
             <div>
               <button
                 className="your__deck__btn"
-                type="button"
-                onClick={() => setView(true)}
+                type="submit"
+                onClick={() => {
+                  setView(true);
+                  setShowCate(false);
+                  handleSubmit();
+                }}
               >
                 Apply
               </button>
@@ -104,26 +107,48 @@ const YourDecks = () => {
             className="your__deck__drop--opt"
             id="dropdown-basic"
           >
-            {/* {select.length > 0 && "Select an Option"}  */}
             {select}
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="your__deck__drop__menu">
-            {[
-              'Most recent created',
-              'Most mastered',
-              'Most need to recall',
-              'Most not studied',
-            ].map((item) => (
-              <div
-                key={`default-${item}`}
-                className="your__deck__drop__check--right"
+            <div className="your__deck__drop__check--right">
+              <Dropdown.Item
+                value={1}
+                onClick={() => {
+                  setSelect("Most recent created");
+                  dispatch(shortAsyns(1));
+                }}
               >
-                <Dropdown.Item value={item} onClick={() => setSelect(item)}>
-                  {item}
-                </Dropdown.Item>
-              </div>
-            ))}
+                Most recent created
+              </Dropdown.Item>
+              <Dropdown.Item
+                value={2}
+                onClick={() => {
+                  setSelect("Most mastered");
+                  dispatch(shortAsyns(2));
+                }}
+              >
+                Most mastered
+              </Dropdown.Item>
+              <Dropdown.Item
+                value={3}
+                onClick={() => {
+                  setSelect("Most need to recall");
+                  dispatch(shortAsyns(3));
+                }}
+              >
+                Most need to recall
+              </Dropdown.Item>
+              <Dropdown.Item
+                value={4}
+                onClick={() => {
+                  setSelect("Most not studied");
+                  dispatch(shortAsyns(4));
+                }}
+              >
+                Most not studied
+              </Dropdown.Item>
+            </div>
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -136,18 +161,24 @@ const YourDecks = () => {
           ))}
       </div>
       {tes ? (
-        <div className="your__deck__container">
-          {allDecksPagination.map((deck, index) => (
-            <Deck
-              key={index}
-              color={deck.color}
-              description={deck.description}
-              title={deck.title}
-              deck_id={deck._id}
-              username={deck.user_Id.username}
-            />
-          ))}
-        </div>
+        loadingSort ? (
+          <Spinner
+            color="success"
+            style={{ margin: "5% 45%", width: "3rem", height: "3rem" }}
+          />
+        ) : (
+          <div className="your__deck__container">
+            {deckData.map((deck, index) => (
+              <Deck
+                key={index}
+                color={deck.color}
+                description={deck.description}
+                title={deck.title}
+                deck_id={deck._id}
+              />
+            ))}
+          </div>
+        )
       ) : (
         <NoDeckFilter />
       )}
@@ -157,18 +188,18 @@ const YourDecks = () => {
           <Spinner
             color="secondary"
             style={{
-              margin: '50px 50%',
+              margin: "50px 50%",
 
-              textAlign: 'center',
+              textAlign: "center",
             }}
           />
         ) : (
           <Button
             color="secondary"
             style={{
-              margin: '50px 40%',
-              padding: '5px 50px',
-              textAlign: 'center',
+              margin: "50px 40%",
+              padding: "5px 50px",
+              textAlign: "center",
             }}
             onClick={clickPagination}
           >

@@ -1,12 +1,15 @@
-import { combineReducers } from 'redux';
-import loginReducer from './loginReducer';
-import regisReducer from './regisReducer';
-import profileReducer from './profileReducer';
-import editProfileReducer from './editProfileReducer';
-import passwordReducer from './passwordReducer';
-import deckReducer from './deckReducer';
-import cardReducer from './cardReducer';
-import praticeReducer from './praticeReducer';
+import { combineReducers } from "redux";
+import loginReducer from "./loginReducer";
+import regisReducer from "./regisReducer";
+import profileReducer from "./profileReducer";
+import editProfileReducer from "./editProfileReducer";
+import passwordReducer from "./passwordReducer";
+import deckReducer from "./deckReducer";
+import cardReducer from "./cardReducer";
+import praticeReducer from "./praticeReducer";
+import categoryReducer from "./categoryReducer";
+import sortReducer from "./sortReducer";
+import filterReducer from "./filterReducer";
 
 export const rootReducer = combineReducers({
   pratice: praticeReducer,
@@ -17,4 +20,7 @@ export const rootReducer = combineReducers({
   profile: profileReducer,
   editProfile: editProfileReducer,
   password: passwordReducer,
+  category: categoryReducer,
+  sort: sortReducer,
+  filter: filterReducer,
 });

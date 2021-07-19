@@ -1,24 +1,31 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
-import deko from '../../assets/image/logo.png';
-import './header.scss';
-import user from '../../assets/image/user.svg';
-import folder from '../../assets/image/folder.svg';
-import logout from '../../assets/image/logout.svg';
+import Dropdown from "react-bootstrap/Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import deko from "../../assets/image/logo.png";
+import "./header.scss";
+import user from "../../assets/image/user.svg";
+import folder from "../../assets/image/folder.svg";
+import logout from "../../assets/image/logout.svg";
+import { useEffect } from "react";
+import { profileAsync } from "../../redux/action/profileAction";
 
 const Header = () => {
-  const username = useSelector((state) => state.login.username);
+  const username = useSelector((state) => state.profile.username);
 
   const historyLanding = useHistory();
+  const dispatch = useDispatch();
 
   const hanldeLogout = () => {
-    historyLanding.push('/');
+    historyLanding.push("/");
     const store = window.localStorage;
     store.clear();
 
     window.location.reload();
   };
+
+  useEffect(() => {
+    dispatch(profileAsync());
+  }, []);
 
   return (
     <nav className="nav">
@@ -49,14 +56,6 @@ const Header = () => {
             alt="profile"
           />
         </Dropdown.Toggle>
-
-        {/* <Dropdown.Menu className="nav__profile__menu">
-          {["Account", "Category", "Logout"].map((item) => (
-            <div key={`default-${item}`} className="your__deck__drop__check">
-              <Dropdown.Item value={item}>{item}</Dropdown.Item>
-            </div>
-          ))}
-        </Dropdown.Menu> */}
 
         <Dropdown.Menu className="nav__profile__menu">
           <div className="nav__profile__drop">
