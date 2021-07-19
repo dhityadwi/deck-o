@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import Navbar from "../../../Components/Header/Header";
+import React, { Component } from 'react';
+import Navbar from '../../../Components/Header/Header';
+import './modalDelete.scss';
 
 class DetailPage extends Component {
   constructor(props) {
     super(props);
     this.state = { width: 0, newWidth: 0, showSearchBox: false, isOpen: false };
 
-    window.addEventListener("resize", this.update);
+    window.addEventListener('resize', this.update);
   }
 
   componentWillMount() {
@@ -26,7 +27,7 @@ class DetailPage extends Component {
   toggleSearchBox = () => {
     this.setState((state) => ({
       showSearchBox: !this.state.showSearchBox,
-      searchWidth: "100%",
+      searchWidth: '100%',
     }));
   };
 
@@ -37,7 +38,7 @@ class DetailPage extends Component {
     // let width = this.state.width - this.state.newWidth;
     let searchWidth = width - 350 / 5;
     return (
-      <div style={{ overflowX: "hidden" }}>
+      <div style={{ overflowX: 'hidden' }}>
         <div className="mx-auto fixed-top">
           <Navbar
             isOpen={isOpen}

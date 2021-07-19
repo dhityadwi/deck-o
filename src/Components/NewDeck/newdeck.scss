@@ -104,41 +104,24 @@
     justify-content: flex-end;
     margin-top: 100px;
     button {
-      background: #e6c7ff;
+      background: #c78ef7;
+      box-shadow: 0 5px #ab6fdc;
+      color: white;
       border-radius: 28.5px;
       width: 249px;
       height: 61px;
       border: none;
     }
+    button:active {
+      box-shadow: none;
+      position: relative;
+      top: 5px;
+    }
+    button:focus {
+      outline: none;
+    }
   }
 }
-
-// .terms {
-//   margin-top: 100px;
-//   .terms-container {
-//     width: 1140px;
-//     height: 160px;
-//     border-radius: 26px;
-//     border: 3px solid #f3f3f3;
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     .term-input {
-//       display: flex;
-//       flex-direction: column;
-
-//       input[type='text'] {
-//         width: 500px;
-//         height: 40px;
-//         overflow: hidden;
-//         border-radius: 26px;
-//         border: 3px solid #f3f3f3;
-//       }
-//       input[type='file'] {
-//         width: 80px;
-//       }
-//     }
-//   }
 
 .add-deck-btn {
   margin: 0 50%;

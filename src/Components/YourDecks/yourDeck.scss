@@ -133,6 +133,9 @@
     position: relative;
     top: 5px;
   }
+  &__btn:focus {
+    outline: none;
+  }
   &__result {
     display: flex;
     padding-bottom: 20px;

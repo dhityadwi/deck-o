@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './session.scss';
 import emot from '../../assets/image/emot-session.png';
+import { Progress } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProgressDecksByUser } from '../../redux/action/deckAction';
 
-const Session = () => {
-  const [session, setSession] = useState([1]);
+const Session = ({ onClick }) => {
+  // const [session, setSession] = useState([]);
+  const dispatch = useDispatch();
+  const { deckProgressByUser } = useSelector((state) => state.deck);
+
+  useEffect(() => {
+    dispatch(getProgressDecksByUser());
+  }, []);
   return (
     <div>
-      {session.length > 0 ? (
+      {deckProgressByUser.length > 0 ? (
         <div className="session-card">
           <div className="title">Machine Learning</div>
+          <Progress
+            color="warning"
+            style={{
+              borderRadius: '44px',
+            }}
+            value={50}
+          />
           <p>Great progress! Keep studying to master this deck</p>
           <button>Resume</button>
+          <p>Great progress! Keep studying to master this deck</p>
+          <button onClick={onClick}>Resume</button>
         </div>
       ) : (
         <div className="no-session-container">

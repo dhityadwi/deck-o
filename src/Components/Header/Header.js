@@ -30,14 +30,15 @@ const Header = () => {
         <Link to="/home">
           <li>Home</li>
         </Link>
-        <Link to="/home/your-decks">
+        <Link to="/your-decks">
           <li>All Decks</li>
         </Link>
         <Link to="/home/test">
           <li>Take Test</li>
         </Link>
       </ul>
-      <Link to="/home/new-deck">
+
+      <Link to="/new-deck">
         <button className="nav__btn">+ New Decks</button>
       </Link>
 
@@ -60,8 +61,8 @@ const Header = () => {
         <Dropdown.Menu className="nav__profile__menu">
           <div className="nav__profile__drop">
             <h4>Hy! {username} </h4>
-            <Link to="/home/profile/">
-              <Dropdown.Item value="account" href="/home/profile">
+            <Link to="/profile">
+              <Dropdown.Item value="account" href="/profile">
                 <img
                   src={user}
                   alt="user"
@@ -71,8 +72,8 @@ const Header = () => {
               </Dropdown.Item>
             </Link>
 
-            <Link to="/home/profile">
-              <Dropdown.Item value="mydeck">
+            <Link to="/profile">
+              <Dropdown.Item value="mydeck" href="/profile">
                 <img
                   src={folder}
                   alt="folder"

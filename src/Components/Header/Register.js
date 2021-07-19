@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ModalReg from "react-modal";
 import GoogleLogin from "react-google-login";
-import { regisUser } from "../../service/userService";
-import { isRegis } from "../../redux/action/regisAction";
+import { isRegis, regisAsyns } from "../../redux/action/regisAction";
 import ReactFacebookLogin from "react-facebook-login";
 import fb from "../../assets/img/fb.png";
 import "../../assets/styles/Register.scss";
@@ -15,8 +14,6 @@ const Register = () => {
   const [inputUsername, setInputUsername] = useState("");
   const [inputPass, setInputPass] = useState("");
   const [inputEmail, setInputEmail] = useState("");
-
-  const [validationReg, setValidationReg] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -42,37 +39,27 @@ const Register = () => {
   const handleReg = (event) => {
     event.preventDefault();
 
-    regisUser(inputUsername, inputEmail, inputPass)
-      .then((response) => {
-        console.log(response, "response");
-
-        const { status } = response;
-
-        dispatch(isRegis(inputUsername, inputEmail, inputPass, status));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(regisAsyns(inputUsername, inputEmail, inputPass));
   };
 
+  const { loading, error } = useSelector((state) => state.register);
+
   const { regisStat } = useSelector((state) => state.register);
+
   useEffect(() => {
     if (regisStat === 200) {
-      <Login />;
-    } else if (regisStat === "") {
-      setValidationReg(false);
-    } else {
-      setValidationReg(true);
+      setRegModal(false);
     }
   }, [regisStat]);
-
-  // console.log(regStat, "status");
-  // console.log(validationReg, "validation");
 
   return (
     <div>
       <strong onClick={openModalReg}>Sign Up</strong>
-      <ModalReg isOpen={regModal} onRequestClose={closedeModalReg}>
+      <ModalReg
+        isOpen={regModal}
+        onRequestClose={closedeModalReg}
+        className="modalRegister"
+      >
         <div className="reg__app">
           <h1>Sign up to get started</h1>
           <div className="reg__app__log">
@@ -105,7 +92,7 @@ const Register = () => {
               placeholder="Password"
             />
 
-            {validationReg && <p>Email already registered.</p>}
+            {/* {validationReg && <p>Email already registered.</p>} */}
 
             <div className="reg__app__check">
               <input className="reg__app__check--box" type="checkbox" />
@@ -116,9 +103,15 @@ const Register = () => {
               </a>
             </div>
 
-            <button type="submit" className="reg__app__button">
-              Create Account
-            </button>
+            {loading && <div class="single4"></div>}
+            {error && (
+              <div className="error-message">Email already registered.</div>
+            )}
+            {!loading && (
+              <button type="submit" className="reg__app__button">
+                Create Account
+              </button>
+            )}
             <p>
               Have an account?{" "}
               <span>

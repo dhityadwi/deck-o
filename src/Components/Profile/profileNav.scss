@@ -7,19 +7,34 @@
 
   &__nav {
     display: flex;
+    justify-content: center;
   }
 
   &__username {
     position: relative;
     top: 10px;
+    text-align: center;
+    border-bottom: 1px solid #e1e1e1;
+    font-weight: bolder;
+    & h3 {
+      font-weight: bolder;
+    }
+  }
+
+  &__button {
+    &--inactive {
+      color: #ab6fdc;
+    }
+    &--active {
+      color: rgb(158, 157, 157);
+    }
   }
 
   &__image {
     & img {
-      height: 50px;
-      width: 50px;
+      height: 95px;
+      width: 95px;
       border-radius: 50%;
-      margin-right: 10px;
     }
   }
 
@@ -30,6 +45,9 @@
     &--pilih {
       & strong {
         cursor: pointer;
+      }
+      &--log {
+        border-top: 1px solid #e1e1e1;
       }
       img {
         margin-right: 10px;

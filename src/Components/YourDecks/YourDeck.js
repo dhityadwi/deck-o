@@ -1,38 +1,54 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import Form from "react-bootstrap/Form";
-import React, { useState } from "react";
-import Deck from "../Deck/Deck";
-import "./yourDeck.scss";
+import Dropdown from 'react-bootstrap/Dropdown';
+import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect } from 'react';
+import Deck from '../Deck/Deck';
+import './yourDeck.scss';
+import NoDeckFilter from './NoDeckFilter';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Spinner } from 'reactstrap';
+import { getAllDecks, getDecksCategory } from '../../redux/action/deckAction';
 
 const YourDecks = () => {
+  const { allDecksPagination, loading, deckCategory } = useSelector(
+    (state) => state.deck
+  );
+  const dispatch = useDispatch();
   const [checks, setCheck] = useState([]);
   const [view, setView] = useState(false);
-  const [select, setSelect] = useState("Select an Option");
+  const [select, setSelect] = useState('Select an Option');
+  const [page, setPage] = useState(2);
+  const [tes, setTes] = useState(true);
+
+  const clickPagination = () => {
+    setPage((prevState) => prevState + 1);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
   const handleClear = (event) => {
     setCheck([]);
   };
 
   const handleCheckbox = (event) => {
-    // event.prevenDefault();
     if (event.target.checked) {
       setCheck([...checks, event.target.value]);
     } else {
       setCheck(checks.filter((item) => item !== event.target.value));
     }
-    console.log(event.target.value, "target value");
   };
-  // console.log(checks, "target cek");
+
+  useEffect(() => {
+    dispatch(getAllDecks(page));
+    dispatch(getDecksCategory());
+  }, [page]);
 
   return (
     <div className="your__deck">
       <div>
         <h3>All decks </h3>
       </div>
-
       <div className="your__deck__filter">
         <Dropdown className="your__deck__down">
           <Dropdown.Toggle className="your__deck__drop" id="dropdown-basic">
@@ -44,27 +60,33 @@ const YourDecks = () => {
             </div>
           )}
           <Dropdown.Menu className="your__deck__drop__menus">
-            {[
-              "Mathematics",
-              "Computer Science",
-              "Language",
-              "Literature",
-              "Philosophy",
-              "Natural Science",
-              "Social Science",
-              "Untagged",
-            ].map((type) => (
-              <div key={`default-${type}`} className="your__deck__drop__check">
+            {deckCategory.map((type) => (
+              <div
+                key={`default-${type._id}`}
+                className="your__deck__drop__check"
+              >
                 <Form.Check
                   onSubmit={handleSubmit}
                   type="checkbox"
-                  value={type}
-                  label={type}
+                  value={type.nameCategory}
+                  label={type.nameCategory}
                   onChange={handleCheckbox}
-                  checked={checks.includes(type)}
+                  checked={checks.includes(type.nameCategory)}
                 />
               </div>
             ))}
+
+            {/* {deckCategory.map((item) => 
+               <div key={`default-${item.nameCategory}`} className="your__deck__drop__check">
+               <Form.Check
+                 onSubmit={handleSubmit}
+                 type="checkbox"
+                 value={item._id}
+                 label={item.nameCategory}
+                 onChange={handleCheckbox}
+                 checked={checks.includes(type)}
+               />
+            )} */}
             <div>
               <button
                 className="your__deck__btn"
@@ -88,10 +110,10 @@ const YourDecks = () => {
 
           <Dropdown.Menu className="your__deck__drop__menu">
             {[
-              "Most recent created",
-              "Most mastered",
-              "Most need to recall",
-              "Most not studied",
+              'Most recent created',
+              'Most mastered',
+              'Most need to recall',
+              'Most not studied',
             ].map((item) => (
               <div
                 key={`default-${item}`}
@@ -104,18 +126,7 @@ const YourDecks = () => {
             ))}
           </Dropdown.Menu>
         </Dropdown>
-
-        {/* <select aria-label="Default select example">
-          <option value="none" selected disabled hidden>
-            Select an Option
-          </option>
-          <option value="1">Most recent created</option>
-          <option value="2">Most mastered</option>
-          <option value="3">Most need to recall</option>
-          <option value="4">Most not studied</option>
-        </select> */}
       </div>
-
       <div className="your__deck__result">
         {view &&
           checks.map((type) => (
@@ -124,16 +135,46 @@ const YourDecks = () => {
             </div>
           ))}
       </div>
+      {tes ? (
+        <div className="your__deck__container">
+          {allDecksPagination.map((deck, index) => (
+            <Deck
+              key={index}
+              color={deck.color}
+              description={deck.description}
+              title={deck.title}
+              deck_id={deck._id}
+              username={deck.user_Id.username}
+            />
+          ))}
+        </div>
+      ) : (
+        <NoDeckFilter />
+      )}
 
-      <div className="your__deck__container">
-        <Deck color={"#AB6FDC"} />
-        <Deck color={"#FF8264"} />
-        <Deck color={"#F4AA27"} />
-        <Deck color={"#AB6FDC"} />
-        <Deck color={"#6884F5"} />
-        <Deck color={"#FF8264"} />
-        <Deck color={"#F4AA27"} />
-        <Deck color={"#AB6FDC"} />
+      <div className="load">
+        {loading ? (
+          <Spinner
+            color="secondary"
+            style={{
+              margin: '50px 50%',
+
+              textAlign: 'center',
+            }}
+          />
+        ) : (
+          <Button
+            color="secondary"
+            style={{
+              margin: '50px 40%',
+              padding: '5px 50px',
+              textAlign: 'center',
+            }}
+            onClick={clickPagination}
+          >
+            <div>Load more</div>
+          </Button>
+        )}
       </div>
     </div>
   );

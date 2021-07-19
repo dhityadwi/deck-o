@@ -3,6 +3,9 @@ const initialState = {
   email: "",
   password: "",
   regisStat: "",
+  loading: false,
+  error: false,
+  message: "",
 };
 
 const regisReducer = (state = initialState, action) => {
@@ -14,6 +17,21 @@ const regisReducer = (state = initialState, action) => {
         email: action.payload.email,
         password: action.payload.password,
         regisStat: action.payload.regisStat,
+        loading: false,
+      };
+
+    case "REGIS/START":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "REGIS/ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        message: action.payload.message,
       };
     default:
       return state;

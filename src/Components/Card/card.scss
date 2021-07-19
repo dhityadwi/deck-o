@@ -1,26 +1,31 @@
-.terms {
+.main-container {
   margin-top: 20px;
-  .terms-container {
-    .prev-input {
-      display: flex;
-      flex-direction: row;
-    }
-    width: 1140px;
-    height: auto;
-    border-radius: 26px;
-    border: 3px solid #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  width: 1140px;
+  height: auto;
+  border-radius: 26px;
+  border: 3px solid #f3f3f3;
+
+  .close-x {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    .term-input {
+    justify-content: flex-end;
+    padding: 10px;
+  }
+
+  .box-container {
+    display: flex;
+    flex-direction: row;
+
+    .correct-input {
       margin-top: 30px;
       display: flex;
       flex-direction: column;
       flex: 1;
-      padding: 0 20px;
+      padding: 0 30px;
 
       input[type='text'] {
+        flex-direction: row;
         width: 400px;
         height: 40px;
         overflow: hidden;
@@ -28,11 +33,14 @@
         border: 3px solid #f3f3f3;
       }
       input[type='file'] {
+        flex-direction: row;
+
         display: none;
         visibility: hidden;
       }
 
       .image-upload {
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         margin-left: 10px;
@@ -41,20 +49,47 @@
         height: 100px;
         display: flex;
         cursor: pointer;
-        margin-bottom: 20px;
       }
     }
 
-    .prev-image {
-      width: 100px;
-      height: 100px;
-      overflow: hidden;
+    .wrong-input {
+      margin-top: 30px;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      flex: 1;
+      padding: 0 30px;
+      margin-bottom: 20px;
 
-      img {
-        width: 100%;
-        height: 100%;
+      input[type='text'] {
+        flex-direction: row;
+        width: 400px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 26px;
+        border: 3px solid #f3f3f3;
+      }
+    }
+
+    .preview-image {
+      padding: 10px 200px 10px 0;
+      margin-left: 40px;
+      overflow: hidden;
+      margin-bottom: 10px;
+
+      .image {
+        max-width: 500px;
+        max-height: 500px;
+
+        img {
+          background-size: cover;
+          width: 100%;
+          height: 100%;
+        }
+        .close-img {
+          right: 10;
+          padding: 5px;
+          margin-left: 55vh;
+        }
       }
     }
   }

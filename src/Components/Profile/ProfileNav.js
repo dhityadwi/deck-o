@@ -6,15 +6,18 @@ import folder from "../../assets/image/folder.svg";
 import logout from "../../assets/image/logout.svg";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { FiCamera } from "react-icons/fi";
+// import prof from "../../assets/img/user.png";
 
 const ProfileNav = () => {
-  const username = useSelector((state) => state.login.username);
+  const username = useSelector((state) => state.profile.username);
 
   const historyLanding = useHistory();
 
   const [menuAktif, setMenuAktif] = useState({
     account: true,
     category: false,
+    logout: false,
   });
 
   const [click, setClick] = useState(1);
@@ -23,6 +26,7 @@ const ProfileNav = () => {
     setMenuAktif({
       account: false,
       category: true,
+      logout: false,
     });
     setClick(2);
   };
@@ -31,6 +35,7 @@ const ProfileNav = () => {
     setMenuAktif({
       account: true,
       category: false,
+      logout: false,
     });
     setClick(1);
   };
@@ -52,10 +57,19 @@ const ProfileNav = () => {
               src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
               alt="profile"
             />
+            <FiCamera
+              size="15"
+              style={{
+                alignItems: "center",
+                color: "gray",
+                marginTop: "57px",
+                cursor: "pointer",
+              }}
+            />
           </div>
-          <div className="profile__username">
-            <h3>{username}</h3>
-          </div>
+        </div>
+        <div className="profile__username">
+          <h3>{username}</h3>
         </div>
         <div className="profile__menu">
           <div className="profile__menu--pilih">
@@ -86,9 +100,18 @@ const ProfileNav = () => {
             </strong>
           </div>
 
-          <div className="profile__menu--pilih">
+          <div className="profile__menu--pilih--log">
             <img src={logout} alt="logout" />
-            <strong onClick={hanldeLogout}>Logout</strong>
+            <strong
+              onClick={hanldeLogout}
+              className={
+                menuAktif.logout
+                  ? "profile__button--inactive"
+                  : "profile__button--active"
+              }
+            >
+              Logout
+            </strong>
           </div>
         </div>
       </div>

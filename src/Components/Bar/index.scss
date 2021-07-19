@@ -1,0 +1,40 @@
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .deck-title {
+    width: 558px;
+    display: flex;
+    flex-direction: column;
+    h5 {
+      padding-bottom: 8px;
+    }
+
+    .bar {
+      margin-top: 20px;
+      width: 558px;
+      height: 11px;
+      background: #c78ef7;
+      border-radius: 22px;
+      margin-bottom: 20px;
+    }
+    .off {
+      background: #e1e1e1;
+    }
+    .detail {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: center;
+
+      .number {
+        background: #f3f3f3;
+        width: 20px;
+        text-align: center;
+        border-radius: 50%;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

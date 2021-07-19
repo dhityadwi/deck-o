@@ -1,3 +1,32 @@
+.newCard-container {
+  margin: 120px 150px;
+  gap: 20px;
+
+  .button-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 100px;
+    button {
+      background: #c78ef7;
+      box-shadow: 0 5px #ab6fdc;
+      color: white;
+      border-radius: 28.5px;
+      width: 249px;
+      height: 61px;
+      border: none;
+    }
+    button:active {
+      box-shadow: none;
+      position: relative;
+      top: 5px;
+    }
+    button:focus {
+      outline: none;
+    }
+  }
+}
+
 .add-card {
   margin-top: 20px;
   text-align: center;

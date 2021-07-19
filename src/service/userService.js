@@ -1,6 +1,5 @@
 export const loginUser = async (email, password) => {
-  const url =
-    "https://wm8mze3jmi.execute-api.ap-southeast-1.amazonaws.com/dev/api/login";
+  const url = "https://deck-o.herokuapp.com/api/login";
   const data = {
     email,
     password,
@@ -22,8 +21,7 @@ export const loginUser = async (email, password) => {
 };
 
 export const regisUser = async (username, email, password) => {
-  const url =
-    "https://wm8mze3jmi.execute-api.ap-southeast-1.amazonaws.com/dev/api/register";
+  const url = "https://deck-o.herokuapp.com/api/register";
   const data = {
     username,
     email,
@@ -37,7 +35,10 @@ export const regisUser = async (username, email, password) => {
       },
       body: JSON.stringify(data),
     });
-    return response;
+    if (response.ok) {
+      return response;
+    }
+    throw new Error("error regis");
   } catch (error) {
     throw error;
   }

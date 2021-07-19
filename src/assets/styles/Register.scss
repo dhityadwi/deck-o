@@ -1,14 +1,54 @@
-.ReactModal__Content {
+.modalRegister {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 423px;
-  min-height: 650px;
+  min-height: 659px;
   text-align: center;
   margin: 50px auto;
-  border-radius: 5% !important;
+  background: #fff;
+  border-radius: 30px !important;
   // padding-bottom: 32px;
   font-family: "Quicksand";
+}
+
+.error-message {
+  color: red;
+}
+
+.single4 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 6px solid #b9b6b6;
+  border-top-color: #9c9797;
+  border-bottom-color: #8d8d8d;
+  -webkit-animation: single4 2.5s infinite ease-in-out;
+  animation: single4 2.5s infinite ease-in-out;
+  position: relative;
+  left: 25vh;
+}
+
+@-webkit-keyframes single4 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(540deg);
+    transform: rotate(540deg);
+  }
+}
+
+@keyframes single4 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(540deg);
+    transform: rotate(540deg);
+  }
 }
 
 .reg__app {
@@ -110,5 +150,8 @@
     box-shadow: none;
     position: relative;
     top: 5px;
+  }
+  &__button:focus {
+    outline: none;
   }
 }

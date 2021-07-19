@@ -11,6 +11,9 @@ const initialState = {
   id: decode.id,
   token: "",
   loginStat: "",
+  loading: false,
+  error: false,
+  message: "",
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -23,10 +26,20 @@ const loginReducer = (state = initialState, action) => {
         id: action.payload.id,
         token: action.payload.token,
         loginStat: action.payload.loginStat,
+        loading: false,
       };
-    case "LOGOUT":
+    case "LOGIN/START":
       return {
-        token: "",
+        ...state,
+        loading: true,
+      };
+
+    case "LOGIN/ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        message: action.payload.message,
       };
     default:
       return state;

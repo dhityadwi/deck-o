@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import ModalLogin from 'react-modal';
-
 import '../../assets/styles/Login.scss';
 import ReactFacebookLogin from 'react-facebook-login';
 import fb from '../../assets/img/fb.png';
 import { useDispatch, useSelector } from 'react-redux';
-import jwt_decode from 'jwt-decode';
-import { isLogin } from '../../redux/action/loginAction';
+import { isLogin, loginAsync } from '../../redux/action/loginAction';
 import { useHistory } from 'react-router-dom';
-import { loginUser } from '../../service/userService';
 import Register from './Register';
 
 ModalLogin.setAppElement('#root');
@@ -20,7 +17,6 @@ const Login = () => {
   const [inputPass, setInputPass] = useState('');
   const [inputEmail, setInputEmail] = useState('');
 
-  const [validationLog, setValidationLog] = useState(false);
   const dispatch = useDispatch();
 
   const historyHome = useHistory();
@@ -45,36 +41,17 @@ const Login = () => {
   // handle SUBMIT LOGIN
   const handleLogin = (event) => {
     event.preventDefault();
-    const store = window.localStorage;
-
-    loginUser(inputEmail, inputPass)
-      .then((response) => {
-        const { token } = response;
-
-        console.log(response);
-
-        const decode = jwt_decode(token);
-        store.setItem('token', JSON.stringify(token));
-
-        const { statusCode } = response;
-        dispatch(
-          isLogin(inputEmail, decode.username, decode.id, token, statusCode)
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(loginAsync(inputEmail, inputPass));
   };
 
+  const { loading, error } = useSelector((state) => state.login);
+
   const { loginStat } = useSelector((state) => state.login);
+
   useEffect(() => {
     if (loginStat === 200) {
       setLoginModal(false);
       historyHome.push('/home');
-    } else if (loginStat === '') {
-      setValidationLog(false);
-    } else {
-      setValidationLog(true);
     }
   }, [loginStat, historyHome]);
 
@@ -83,7 +60,11 @@ const Login = () => {
   return (
     <div>
       <strong onClick={openModal}>Login</strong>
-      <ModalLogin isOpen={loginModal} onRequestClose={closedeModal}>
+      <ModalLogin
+        isOpen={loginModal}
+        onRequestClose={closedeModal}
+        className="modalLogin"
+      >
         <div className="login__app">
           <h1>Login in to your account</h1>
           <div className="login__app__log">
@@ -110,33 +91,24 @@ const Login = () => {
               placeholder="Password"
             />
 
-            {validationLog && (
-              <p>Email not registered, Please create an account first.</p>
-            )}
-            {/* {validationLogWrongPass && (
-              <p>Wrong Email or Password.</p>
-            )} */}
-
             <a href="/#">
               <p className="login__app__title">Forgot Password</p>
             </a>
 
-            <button className="login__app__button" type="submit">
-              Login
-            </button>
+            {loading && <div class="single4"></div>}
+            {error && (
+              <div className="error-message">Wrong Email or Password.</div>
+            )}
+            {!loading && (
+              <button className="login__app__button" type="submit">
+                Login
+              </button>
+            )}
             <p>
               Don't have an account?{' '}
-              <a
-                href="/#"
-                // onClick={() => {
-                //   setLoginModal(false);
-                //   setRegModal(true);
-                // }}
-              >
-                <span>
-                  <Register />
-                </span>
-              </a>{' '}
+              <span>
+                <Register />
+              </span>
             </p>
           </form>
         </div>
