@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import './session.scss';
-import emot from '../../assets/image/emot-session.png';
-import { Progress } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProgressDecksByUser } from '../../redux/action/deckAction';
+import React, { useState, useEffect } from "react";
+import "./session.scss";
+import emot from "../../assets/image/emot-session.png";
+import { Progress } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getProgressDecksByUser } from "../../redux/action/deckAction";
 
 const Session = ({ onClick }) => {
   // const [session, setSession] = useState([]);
   const dispatch = useDispatch();
   const { deckProgressByUser } = useSelector((state) => state.deck);
+  const username = useSelector((state) => state.profile.username);
 
   useEffect(() => {
     dispatch(getProgressDecksByUser());
@@ -21,7 +22,7 @@ const Session = ({ onClick }) => {
           <Progress
             color="warning"
             style={{
-              borderRadius: '44px',
+              borderRadius: "44px",
             }}
             value={50}
           />
@@ -33,7 +34,7 @@ const Session = ({ onClick }) => {
       ) : (
         <div className="no-session-container">
           <div className="session-content">
-            <h3>Rara, you’ve got tons of decks! </h3>
+            <h3>{username}, you’ve got tons of decks! </h3>
             <p>Keep studying them before you take the test. Let’s review it!</p>
             <button>Star the session</button>
           </div>
