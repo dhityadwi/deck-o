@@ -35,10 +35,8 @@ export const regisUser = async (username, email, password) => {
       },
       body: JSON.stringify(data),
     });
-    if (response.ok) {
-      return response;
-    }
-    throw new Error("error regis");
+
+    return response.json();
   } catch (error) {
     throw error;
   }

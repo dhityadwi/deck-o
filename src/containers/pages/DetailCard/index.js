@@ -15,6 +15,7 @@ import {
   getMastered,
 } from '../../../redux/action/praticeAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { getResultTest } from '../../../redux/action/testAction';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Detail = () => {
     cardsAmountMastered,
     deckByUser,
   } = useSelector((state) => state.deck);
-
+  const resultTest = useSelector((state) => state.test?.resultTest);
   const { username } = useSelector((state) => state.login);
 
   const [openModal, setOpenModal] = useState(false);
@@ -34,6 +35,9 @@ const Detail = () => {
   const history = useHistory();
   const location = useLocation();
   const { id } = useParams();
+
+  console.log(location.state.modal + ' detail');
+  console.log(location.state.username + ' detail');
 
   const onCloseModal = () => {
     setOpenModal(false);
@@ -47,12 +51,13 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getDeckById(id));
     dispatch(getDecksByUser());
+    dispatch(getResultTest(id));
   }, []);
 
   return (
     <div>
-      {loading ? (
-        'loading...'
+      {!resultTest.dtResultDecksTest && !resultTest.dtResultTakeTest ? (
+        <h1 style={{ textAlign: 'center' }}>Loading...</h1>
       ) : (
         <DetailPage>
           <div>
@@ -103,9 +108,9 @@ const Detail = () => {
                       <div
                         style={{
                           display:
-                            location.state.username === username
-                              ? null
-                              : 'none',
+                            username !== location.state.username
+                              ? 'none'
+                              : null,
                         }}
                       >
                         <FontAwesomeIcon
@@ -173,6 +178,7 @@ const Detail = () => {
                             history.push(`/study/${id}`, {
                               deckid: id,
                               praticeFor: 'needtostudy',
+                              username: location.state.username,
                             })
                           }
                         >
@@ -198,6 +204,7 @@ const Detail = () => {
                             history.push(`/study/${id}`, {
                               deckid: id,
                               praticeFor: 'needtorecall',
+                              username: location.state.username,
                             })
                           }
                         >
@@ -216,6 +223,7 @@ const Detail = () => {
                             history.push(`/study/${id}`, {
                               deckid: id,
                               praticeFor: 'mastered',
+                              username: location.state.username,
                             })
                           }
                         >
@@ -235,16 +243,18 @@ const Detail = () => {
                         <div className="card-body">
                           <h4 className="mt-3">Your Test Result</h4>
                           <p className="pr-2" style={{ color: '#898B8F' }}>
-                            You haven’t took any test for this deck.
+                            {resultTest?.dtResultDecksTest.length > 0
+                              ? 'Your last score for this deck                                '
+                              : 'You havent take test for this deck'}
                           </p>
 
                           <ScoredDetail
                             score={
-                              // deckDetailById.dtDecksDetailsByIdDecks.length > 0
-                              //   ? deckDetailById.dtDecksDetailsByIdDecks[0].progress
-                              //   : 0
-                              // deckDetailById.dtDecksDetailsByIdDecks[0].progress
-                              50
+                              resultTest?.dtResultDecksTest.length > 0
+                                ? Math.floor(
+                                    resultTest?.dtResultDecksTest[0].score
+                                  )
+                                : 0
                             }
                           />
                           <ButtonLabel
