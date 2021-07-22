@@ -9,22 +9,41 @@ const Deck = ({
   category_id,
   nameCategory,
   username,
+  type,
+  showModal,
+  currentPath,
+  getDeckId,
+  resultTest,
 }) => {
-  // console.log(color, title, deck_id, category_id, nameCategory);
-
   return (
-    <Link
-      to={{
-        pathname: `/detail/${deck_id}`,
-        state: { username },
-      }}
-    >
-      <div className="deck" style={{ background: `${color}` }}>
-        <div className="deck-title">
-          <h3>{title === '' ? 'No Title' : title}</h3>
+    <div>
+      {currentPath === '/home/test/choose-deck' ? (
+        <div
+          className="deck"
+          style={{ background: `${color}` }}
+          onClick={() => showModal(true)}
+        >
+          <div className="deck-title">
+            <h3>{title === '' ? 'No Title' : title}</h3>
+          </div>
         </div>
-      </div>
-    </Link>
+      ) : resultTest ? (
+        console.log('result')
+      ) : (
+        <Link
+          to={{
+            pathname: `/detail/${deck_id}`,
+            state: { username },
+          }}
+        >
+          <div className="deck" style={{ background: `${color}` }}>
+            <div className="deck-title">
+              <h3>{title === '' ? 'No Title' : title}</h3>
+            </div>
+          </div>
+        </Link>
+      )}
+    </div>
   );
 };
 

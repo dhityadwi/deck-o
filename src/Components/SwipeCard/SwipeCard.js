@@ -3,7 +3,7 @@ import './swipecard.scss';
 import TinderCard from 'react-tinder-card';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { Progress } from 'reactstrap';
-import Modal from 'react-modal';
+import ModalSwipe from './ModalSwipe';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -13,13 +13,13 @@ import {
   swipeLeft,
   swipeRight,
 } from '../../redux/action/praticeAction';
-import { Redirect, useHistory, useLocation, Link } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 
 const SwipeCard = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const { pratice, loading, cardsAmount, afterSwipeColor } = useSelector(
+  const { pratice, loading, cardsAmount } = useSelector(
     (state) => state.pratice
   );
 
@@ -47,12 +47,14 @@ const SwipeCard = () => {
     }
   };
 
+  console.log(history);
+
   const openModal = (n) => {
     setTimeout(() => {
       if (n === 0) {
-        // setIsOpen(true)
+        setIsOpen(true);
       }
-    }, 1000);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -72,7 +74,7 @@ const SwipeCard = () => {
   return (
     <div style={{ background: colorBg, textAlign: 'center' }}>
       {loading ? (
-        'Loading...'
+        <h1 style={{ textAlign: 'center', marginTop: '150px' }}>Loading...</h1>
       ) : (
         <div>
           <div
@@ -147,9 +149,15 @@ const SwipeCard = () => {
               <p>{currentCardRight}</p>
             </div>
           </div>
-          <Modal isOpen={isOpen}>
+          <ModalSwipe
+            isOpen={isOpen}
+            type={location.state.praticeFor}
+            id={location.state.deckid}
+            username={username}
+          />
+          {/* <Modal isOpen={isOpen}>
             <h1>Hallo test Modal</h1>
-          </Modal>
+          </Modal> */}
         </div>
       )}
     </div>

@@ -33,11 +33,7 @@ const Routes = () => {
         <Route exact path="/home/profile/my-deck" component={MyDeck}></Route>
         <Route exact path="/home/profile" component={ProfilePage}></Route>
         <Route exact path="/home/your-decks" component={YourDeckPage}></Route>
-        {/* <Route
-          exact
-          path="/your-decks/edit/:id"
-          component={EditYourDeck}
-        ></Route> */}
+
         <Route exact path="/home/new-deck" component={NewDeck}></Route>
         <Route exact path="/home" component={HomePage}></Route>
         <Route exact path="/" component={LandingPage}></Route>
@@ -54,7 +50,11 @@ const Routes = () => {
           component={TrueOrFalse}
         ></Route>
         <Route exact path="/home/test/multiple" component={Multiple}></Route>
-        <Route exact path="/home/test/result" component={TestResult}></Route>
+        <Route
+          exact
+          path="/home/test/result/:id"
+          component={TestResult}
+        ></Route>
         <Route
           exact
           path="/detail/edit-deck/:id"

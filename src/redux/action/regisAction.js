@@ -33,7 +33,7 @@ export const regisAsyns = (username, email, password) => {
 
     regisUser(username, email, password)
       .then((response) => {
-        console.log(response, "respon");
+        console.log(response, "respon regis");
 
         const { status } = response;
         console.log(status, "stat");

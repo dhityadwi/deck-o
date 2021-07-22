@@ -38,7 +38,7 @@ const Card = ({
           <input
             type="text"
             className="term"
-            value={termValue}
+            defaultValue={termValue}
             onChange={onChangeTerm}
           />
         </div>
@@ -47,7 +47,7 @@ const Card = ({
           <input
             type="text"
             className="term"
-            value={expValue}
+            defaultValue={expValue}
             onChange={onChangeExp}
           />
         </div>
@@ -74,21 +74,21 @@ const Card = ({
           <input
             type="text"
             className="term"
-            value={expValue1}
+            defaultValue={expValue1}
             onChange={onChangeExp1}
           />
           <label htmlFor="">Wrong Explanation 2</label>
           <input
             type="text"
             className="term"
-            value={expValue2}
+            defaultValue={expValue2}
             onChange={onChangeExp2}
           />
           <label htmlFor="">Wrong Explanation 3</label>
           <input
             type="text"
             className="term"
-            value={expValue3}
+            defaultValue={expValue3}
             onChange={onChangeExp3}
           />
         </div>
@@ -106,7 +106,7 @@ const Card = ({
                   onClick={handleDeleteImg}
                 />
               </div>
-              <img src={URL.createObjectURL(image)} alt={image} />
+              <img src={URL.createObjectURL(image)} alt={'test'} />
             </div>
           </div>
         ) : null}

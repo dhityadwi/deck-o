@@ -95,7 +95,7 @@ const Login = () => {
               <p className="login__app__title">Forgot Password</p>
             </a>
 
-            {loading && <div class="single4"></div>}
+            {loading && <div className="single4"></div>}
             {error && (
               <div className="error-message">Wrong Email or Password.</div>
             )}

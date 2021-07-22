@@ -1,5 +1,5 @@
 .nav {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   position: fixed;
   left: 0px;
   top: 0px;
@@ -9,7 +9,7 @@
   padding: 15px 50px;
   background: #ab6fdc;
   font-size: 18px;
-  z-index: 100;
+  z-index: 1001;
   &__icon {
     padding-left: 105px;
   }
@@ -90,7 +90,7 @@
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
-    font-family: 'Quicksand';
+    font-family: "Quicksand";
     margin-left: 20px;
   }
   &__btn:focus {

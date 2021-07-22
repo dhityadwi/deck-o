@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOADING, CREATE_CARD } from './types';
+import { LOADING, CREATE_CARD, GET_CARDS_BY_DECKID } from './types';
 
 export const createCard = (data, cardLength) => async (dispatch, getState) => {
   dispatch(setLoading());
@@ -23,7 +23,7 @@ export const createCard = (data, cardLength) => async (dispatch, getState) => {
   }
 };
 
-export const getCardsByDeckId = () => async (dispatch, getState) => {
+export const getCardsByDeckId = (card_id) => async (dispatch, getState) => {
   dispatch(setLoading());
   const token = window.localStorage.getItem('token');
 
@@ -31,14 +31,15 @@ export const getCardsByDeckId = () => async (dispatch, getState) => {
     headers: { Authorization: token },
   };
 
-  const {
-    deck: { createdDeck },
-  } = getState();
-
   try {
     const res = await axios.get(
-      `https://deck-o.herokuapp.com/api/getCard/${createdDeck._id}`
+      `https://deck-o.herokuapp.com/api/getCard/${card_id}`,
+      config
     );
+
+    if (res.data.statusCode === 200) {
+      dispatch({ type: GET_CARDS_BY_DECKID, payload: res.data.data });
+    }
   } catch (error) {
     throw error;
   }

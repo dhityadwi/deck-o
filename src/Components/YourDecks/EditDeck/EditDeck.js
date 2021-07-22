@@ -2,16 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiCheck } from 'react-icons/fi';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { getDecksByUser, editDeck } from '..//../../redux/action/deckAction';
-import axios from 'axios';
+import {
+  getDecksByUser,
+  editDeck,
+  getDecksCategory,
+} from '../../../redux/action/deckAction';
+import { getCardsByDeckId } from '../../../redux/action/cardAction';
 import '../EditDeck/editDeck.scss';
+
+import { Toast, ToastBody, ToastHeader } from 'reactstrap';
 
 const EditDeck = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { deckByUser, loading, statusCode } = useSelector(
+  const { deckByUser, loading, statusCode, deckCategory } = useSelector(
     (state) => state.deck
   );
+
+  const { cardsByDeckId } = useSelector((state) => state.card);
   const [showListTerm, setShowListTerm] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -20,16 +28,12 @@ const EditDeck = () => {
 
   const location = useLocation();
 
-  console.log(location.state.dataEdit);
-
-  const handleNext = async () => {};
-
   const handleSubmit = () => {
     const data = {
-      title,
+      title: title,
       category_Id: category,
-      description,
-      color,
+      description: description,
+      color: color,
     };
     dispatch(editDeck(data, id));
   };
@@ -64,6 +68,8 @@ const EditDeck = () => {
 
   useEffect(() => {
     dispatch(getDecksByUser());
+    dispatch(getDecksCategory());
+    dispatch(getCardsByDeckId(id));
   }, []);
 
   return (
@@ -93,61 +99,6 @@ const EditDeck = () => {
             </div>
           </div>
 
-          {/* {deckByUser
-              .filter((deck) => deck._id === id)
-              .map((deck) => (
-                <div className="deck__edit__form">
-                  <div className="deck__edit__form__left">
-                    <label htmlFor="">
-                      <p>Title</p>
-                    </label>
-                    <input
-                      type="text"
-                      value={deck.title || title}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <label>Category</label>
-                    <select
-                      // value={dataDeckEdit.category_Id}
-                      onChange={(e) => setCategory(e.target.value)}
-                    >
-                      {options.map((item) => (
-                        <option key={item.name} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="deck__edit__color">
-                      <p>Color Tag</p>
-                      <div className="deck__edit__color--box">
-                        {arrayColor.map((item, index) => (
-                          <button
-                            className="deck__edit__color--circel"
-                            key={index}
-                            onClick={() => {
-                              setActiveColor(colors[index]);
-                              setColor(item);
-                            }}
-                            style={{ background: item }}
-                          >
-                            {activecolor[index] ? <FiCheck /> : ''}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="deck__edit__form__right">
-                    <textarea
-                      name="decription"
-                      // value={dataDeckEdit.description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      id=""
-                      placeholder="    Decription (Optional)"
-                    ></textarea>
-                  </div>
-                </div>
-              ))} */}
-
           <div className="deck__edit__details">
             <h3>Deck Details</h3>
             <div className="deck__edit__form">
@@ -165,9 +116,9 @@ const EditDeck = () => {
                   defaultValue={location.state.dataEdit.category_Id}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  {options.map((item) => (
-                    <option key={item.name} value={item.value}>
-                      {item.name}
+                  {deckCategory.map((item) => (
+                    <option key={item.label} value={item._id}>
+                      {item.label}
                     </option>
                   ))}
                 </select>
@@ -207,7 +158,12 @@ const EditDeck = () => {
               <button className="button__footer__cancel">Cancel</button>{' '}
             </Link>
 
-            <Link to={`/detail/edit-cards/${id}`}>
+            <Link
+              to={{
+                pathname: `/detail/edit-cards/${id}`,
+                state: { editCardData: cardsByDeckId },
+              }}
+            >
               <button onClick={handleSubmit} className="button__footer__save">
                 Save Changes
               </button>

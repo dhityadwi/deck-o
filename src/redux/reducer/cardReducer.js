@@ -1,8 +1,14 @@
-import { LOADING, CREATE_CARD, GET_CARDS_BY_DECKID } from '../action/types';
+import {
+  LOADING,
+  CREATE_CARD,
+  GET_CARDS_BY_DECKID,
+  GET_DATA_EDIT,
+} from '../action/types';
 
 const initialState = {
   createCard: [],
   cardsByDeckId: [],
+  editCardData: [],
   loading: false,
 };
 

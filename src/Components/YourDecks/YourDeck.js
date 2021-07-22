@@ -1,14 +1,14 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import Form from "react-bootstrap/Form";
-import React, { useState, useEffect } from "react";
-import Deck from "../Deck/Deck";
-import "./yourDeck.scss";
-import NoDeckFilter from "./NoDeckFilter";
-import { useSelector, useDispatch } from "react-redux";
-import { Button, Spinner } from "reactstrap";
-import { getAllDecks, getDecksCategory } from "../../redux/action/deckAction";
-import { filterAsyns } from "../../redux/action/filterAction";
-import { shortAsyns } from "../../redux/action/sortAction";
+import Dropdown from 'react-bootstrap/Dropdown';
+import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect } from 'react';
+import Deck from '../Deck/Deck';
+import './yourDeck.scss';
+import NoDeckFilter from './NoDeckFilter';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Spinner } from 'reactstrap';
+import { getAllDecks, getDecksCategory } from '../../redux/action/deckAction';
+import { filterAsyns } from '../../redux/action/filterAction';
+import { shortAsyns } from '../../redux/action/sortAction';
 // import { categoryAsync } from "../../redux/action/categoryAction";
 
 const YourDecks = () => {
@@ -18,23 +18,23 @@ const YourDecks = () => {
   const dispatch = useDispatch();
   const [checks, setCheck] = useState([]);
   const [view, setView] = useState(false);
-  const [select, setSelect] = useState("Select an Option");
+  const [select, setSelect] = useState('Select an Option');
   const [page, setPage] = useState(2);
   const [tes, setTes] = useState(true);
   // const { data } = useSelector((state) => state.category);
-  console.log(checks, "category check");
+  console.log(checks, 'category check');
 
   const { data, loadingSort } = useSelector((state) => state.sort);
   const { filter, loadingFilter } = useSelector((state) => state.filter);
 
-  console.log(filter, "data filter cat");
-  console.log(data, "ini data sort");
+  console.log(filter, 'data filter cat');
+  console.log(data, 'ini data sort');
 
   const [showCate, setShowCate] = useState(false);
 
   const [deckMapping, setDeckMapping] = useState();
 
-  console.log(deckMapping + " deck mapping");
+  console.log(deckMapping + ' deck mapping');
 
   const deckData = () => {
     if (data.length !== 0 || filter.length !== 0) {
@@ -68,8 +68,8 @@ const YourDecks = () => {
         checks.filter((item) => item !== JSON.parse(event.target.value))
       );
     }
-    console.log(event.target.value, "target value");
-    console.log(event.target.checked, "target checked");
+    console.log(event.target.value, 'target value');
+    console.log(event.target.checked, 'target checked');
   };
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const YourDecks = () => {
               <Dropdown.Item
                 value={1}
                 onClick={() => {
-                  setSelect("Most recent created");
+                  setSelect('Most recent created');
                   dispatch(shortAsyns(1));
                 }}
               >
@@ -150,7 +150,7 @@ const YourDecks = () => {
               <Dropdown.Item
                 value={2}
                 onClick={() => {
-                  setSelect("Most mastered");
+                  setSelect('Most mastered');
                   dispatch(shortAsyns(2));
                 }}
               >
@@ -159,7 +159,7 @@ const YourDecks = () => {
               <Dropdown.Item
                 value={3}
                 onClick={() => {
-                  setSelect("Most need to recall");
+                  setSelect('Most need to recall');
                   dispatch(shortAsyns(3));
                 }}
               >
@@ -168,7 +168,7 @@ const YourDecks = () => {
               <Dropdown.Item
                 value={4}
                 onClick={() => {
-                  setSelect("Most not studied");
+                  setSelect('Most not studied');
                   dispatch(shortAsyns(4));
                 }}
               >
@@ -182,7 +182,7 @@ const YourDecks = () => {
         {view &&
           checks.map((type) => (
             <div key={`default-${type}`} className="your__deck__result--view">
-              {type}
+              {type.label}
             </div>
           ))}
       </div>
@@ -190,7 +190,7 @@ const YourDecks = () => {
         loadingSort || loadingFilter ? (
           <Spinner
             color="success"
-            style={{ margin: "5% 45%", width: "3rem", height: "3rem" }}
+            style={{ margin: '5% 45%', width: '3rem', height: '3rem' }}
           />
         ) : (
           <div className="your__deck__container">
@@ -201,6 +201,7 @@ const YourDecks = () => {
                 description={deck.description}
                 title={deck.title}
                 deck_id={deck._id}
+                username={deck.user_Id.username}
               />
             ))}
           </div>
@@ -214,18 +215,18 @@ const YourDecks = () => {
           <Spinner
             color="secondary"
             style={{
-              margin: "50px 50%",
+              margin: '50px 50%',
 
-              textAlign: "center",
+              textAlign: 'center',
             }}
           />
         ) : (
           <Button
             color="secondary"
             style={{
-              margin: "50px 40%",
-              padding: "5px 50px",
-              textAlign: "center",
+              margin: '50px 40%',
+              padding: '5px 50px',
+              textAlign: 'center',
             }}
             onClick={clickPagination}
           >

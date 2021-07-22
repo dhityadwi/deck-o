@@ -26,7 +26,7 @@ const Header = () => {
   useEffect(() => {
     dispatch(profileAsync());
   }, []);
-
+  
   return (
     <nav className="nav">
       <label className="nav__icon">
@@ -56,6 +56,14 @@ const Header = () => {
             alt="profile"
           />
         </Dropdown.Toggle>
+
+        {/* <Dropdown.Menu className="nav__profile__menu">
+          {["Account", "Category", "Logout"].map((item) => (
+            <div key={`default-${item}`} className="your__deck__drop__check">
+              <Dropdown.Item value={item}>{item}</Dropdown.Item>
+            </div>
+          ))}
+        </Dropdown.Menu> */}
 
         <Dropdown.Menu className="nav__profile__menu">
           <div className="nav__profile__drop">

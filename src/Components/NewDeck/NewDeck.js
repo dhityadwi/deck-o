@@ -75,8 +75,8 @@ const YourDeck = () => {
               onChange={(e) => setCategory(e.target.value)}
             >
               {deckCategory.map((item) => (
-                <option key={item.nameCategory} value={item._id}>
-                  {item.nameCategory}
+                <option key={item.label} value={item._id}>
+                  {item.label}
                 </option>
               ))}
             </select>
