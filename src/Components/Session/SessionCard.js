@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import './session.scss';
-import emot from '../../assets/image/emot-session.png';
-import { Progress } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProgressDecksByUser } from '../../redux/action/deckAction';
+import React, { useState, useEffect } from "react";
+import "./session.scss";
+import emot from "../../assets/image/emot-session.png";
+import { Progress } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getProgressDecksByUser } from "../../redux/action/deckAction";
 
 const Session = ({ onClick }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Session = ({ onClick }) => {
 
   useEffect(() => {
     dispatch(getProgressDecksByUser());
-    console.log(deckProgressByUser[0].decksId.title, ' session');
+    // console.log(deckProgressByUser[0].decksId.title, ' session');
   }, []);
   return (
     <div>
@@ -45,7 +45,7 @@ const Session = ({ onClick }) => {
             <Progress
               color="warning"
               style={{
-                borderRadius: '44px',
+                borderRadius: "44px",
               }}
               value={50}
             />
