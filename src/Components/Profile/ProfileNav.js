@@ -7,6 +7,7 @@ import logout from "../../assets/image/logout.svg";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { FiCamera } from "react-icons/fi";
+import { Spinner } from "reactstrap";
 // import prof from "../../assets/img/user.png";
 
 const ProfileNav = () => {
@@ -48,6 +49,8 @@ const ProfileNav = () => {
     window.location.reload();
   };
 
+  const { loadingProf } = useSelector((state) => state.profile);
+
   return (
     <div className="containerNav">
       <div className="profile">
@@ -69,7 +72,14 @@ const ProfileNav = () => {
           </div>
         </div>
         <div className="profile__username">
-          <h3>{username}</h3>
+          {loadingProf ? (
+            <Spinner
+              color="warning"
+              style={{ margin: "5% 45%", width: "2rem", height: "2rem" }}
+            />
+          ) : (
+            <p>{username}</p>
+          )}
         </div>
         <div className="profile__menu">
           <div className="profile__menu--pilih">

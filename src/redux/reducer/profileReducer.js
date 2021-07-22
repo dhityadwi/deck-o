@@ -1,7 +1,7 @@
 const initialState = {
   username: "",
   email: "",
-  loading: false,
+  loadingProf: false,
   error: false,
   message: "",
 };
@@ -13,18 +13,18 @@ const getProfileReducer = (state = initialState, action) => {
         ...state,
         email: action.payload.email,
         username: action.payload.username,
-        loading: false,
+        loadingProf: false,
       };
     case "GET_PROFILE/START":
       return {
         ...state,
-        loading: true,
+        loadingProf: true,
       };
 
     case "GET_PROFILE/ERROR":
       return {
         ...state,
-        loading: false,
+        loadingProf: false,
         error: true,
         message: action.payload.message,
       };

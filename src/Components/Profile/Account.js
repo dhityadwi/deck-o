@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import "./account.scss";
 import ModalChangePass from "react-modal";
 import ModalChangeEmail from "react-modal";
-import ModalChangeUser from "react-modal";
+import ModalAlert from "react-modal";
+import ModalAlertPass from "react-modal";
 import { error } from "jquery";
 import { profileAsync } from "../../redux/action/profileAction";
 import { putProfileAsync } from "../../redux/action/editProfileAction";
 import { passwordAsyn } from "../../redux/action/passwordAction";
+import { Spinner } from "reactstrap";
 
 const Account = () => {
   const username = useSelector((state) => state.profile.username);
@@ -18,7 +20,8 @@ const Account = () => {
 
   const [changePassModal, setChangesPassModal] = useState(false);
   const [changeEmailModal, setChangesEmailModal] = useState(false);
-  const [changeUserModal, setChangesUserModal] = useState(false);
+  const [changeAlertModal, setChangesAlertModal] = useState(false);
+  const [changeAlertModalPass, setChangesAlertModalPass] = useState(false);
 
   const [passCurrent, setPassCurrent] = useState("");
   const [passNew, setPassNew] = useState("");
@@ -64,14 +67,21 @@ const Account = () => {
     dispatch(putProfileAsync(newUser, newEmail));
   };
 
-  // Modal User
-  const openModalUser = () => {
-    setChangesUserModal(true);
+  // Modal Alert
+  const openModalAlert = () => {
+    setChangesAlertModal(true);
   };
-  const closeModalUser = () => {
-    setChangesUserModal(false);
+  const closeModalAlert = () => {
+    setChangesAlertModal(false);
   };
-  // Handle User
+  const openModalAlertPass = () => {
+    setChangesAlertModalPass(true);
+  };
+  const closeModalAlertPass = () => {
+    setChangesAlertModalPass(false);
+  };
+
+  // Handle NewUsername
   const handleNewUser = (event) => {
     setNewUser(event.target.value);
   };
@@ -81,6 +91,24 @@ const Account = () => {
   }, []);
   // console.log(username, "username");
 
+  const { changePassStat } = useSelector((state) => state.password);
+  useEffect(() => {
+    if (changePassStat === 200) {
+      setChangesPassModal(false);
+      setChangesAlertModalPass(true);
+    }
+  }, [changePassStat]);
+
+  const { editProfStat } = useSelector((state) => state.editProfile);
+  useEffect(() => {
+    if (editProfStat === 200) {
+      setChangesEmailModal(false);
+      setChangesAlertModal(true);
+    }
+  }, [editProfStat]);
+
+  const { loadingProf } = useSelector((state) => state.profile);
+
   return (
     <div className="account">
       <span>Account Details</span>
@@ -89,18 +117,80 @@ const Account = () => {
         <div className="account__username__container">
           <div className="account__username--box">
             <div className="account__username--name">
-              <p>{username}</p>
+              {loadingProf ? (
+                <Spinner
+                  color="warning"
+                  style={{
+                    margin: "5% 10%",
+                    width: "1.5rem",
+                    height: "1.5rem",
+                  }}
+                />
+              ) : (
+                <p>{username}</p>
+              )}
             </div>
           </div>
         </div>
 
+        <ModalAlert
+          isOpen={changeAlertModal}
+          onRequestClose={closeModalAlert}
+          className="modalAlert"
+        >
+          <div className="modalAlert__cont">
+            {/* <span onClick={this.onCloseModal}>X</span> */}
+            <h3>Change success!</h3>
+            <p>Please refresh your page after edit your profile</p>
+            <div className="modalAlert__btn">
+              <button className="modalAlert__no" onClick={closeModalAlert}>
+                Close
+              </button>
+            </div>
+          </div>
+        </ModalAlert>
+
+        <ModalAlertPass
+          isOpen={changeAlertModalPass}
+          onRequestClose={closeModalAlertPass}
+          className="modalAlert"
+        >
+          <div className="modalAlert__cont">
+            {/* <span onClick={this.onCloseModal}>X</span> */}
+            <h3>Change success!</h3>
+            <p>Please logout and login again</p>
+            <div className="modalAlert__btn">
+              <button
+                className="modalAlert__no"
+                onClick={() => {
+                  closeModalAlertPass();
+                  window.location.reload();
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </ModalAlertPass>
+
         <div className="account__email">
           <div className="account__email--title">
             <span>Email Addres</span>
-            <p>
-              Your email address is{" "}
-              <span style={{ fontWeight: "bolder" }}>{email}</span>
-            </p>
+            {loadingProf ? (
+              <Spinner
+                color="warning"
+                style={{
+                  margin: "5% 25%",
+                  width: "1.5rem",
+                  height: "1.5rem",
+                }}
+              />
+            ) : (
+              <p>
+                Your email address is{" "}
+                <span style={{ fontWeight: "bolder" }}>{email}</span>
+              </p>
+            )}
           </div>
           <ModalChangeEmail
             isOpen={changeEmailModal}

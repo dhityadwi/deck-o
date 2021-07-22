@@ -9,6 +9,7 @@ import { Button, Spinner } from "reactstrap";
 import { getAllDecks, getDecksCategory } from "../../redux/action/deckAction";
 import { filterAsyns } from "../../redux/action/filterAction";
 import { shortAsyns } from "../../redux/action/sortAction";
+// import { categoryAsync } from "../../redux/action/categoryAction";
 
 const YourDecks = () => {
   const { allDecksPagination, loading, deckCategory } = useSelector(
@@ -20,21 +21,39 @@ const YourDecks = () => {
   const [select, setSelect] = useState("Select an Option");
   const [page, setPage] = useState(2);
   const [tes, setTes] = useState(true);
+  // const { data } = useSelector((state) => state.category);
+  console.log(checks, "category check");
 
   const { data, loadingSort } = useSelector((state) => state.sort);
+  const { filter, loadingFilter } = useSelector((state) => state.filter);
 
+  console.log(filter, "data filter cat");
   console.log(data, "ini data sort");
 
   const [showCate, setShowCate] = useState(false);
 
-  const deckData = data.length === 0 ? allDecksPagination : data;
+  const [deckMapping, setDeckMapping] = useState();
+
+  console.log(deckMapping + " deck mapping");
+
+  const deckData = () => {
+    if (data.length !== 0 || filter.length !== 0) {
+      if (data.length !== 0) {
+        return data;
+      } else {
+        return filter;
+      }
+    } else {
+      return allDecksPagination;
+    }
+  };
 
   const clickPagination = () => {
     setPage((prevState) => prevState + 1);
   };
 
   const handleSubmit = () => {
-    dispatch(filterAsyns(["60dc7dbd0fa74fdc178694bf"]));
+    dispatch(filterAsyns(checks));
   };
 
   const handleClear = (event) => {
@@ -43,11 +62,14 @@ const YourDecks = () => {
 
   const handleCheckbox = (event) => {
     if (event.target.checked) {
-      setCheck([...checks, event.target.value]);
+      setCheck([...checks, JSON.parse(event.target.value)]);
     } else {
-      setCheck(checks.filter((item) => item !== event.target.value));
+      setCheck(
+        checks.filter((item) => item !== JSON.parse(event.target.value))
+      );
     }
     console.log(event.target.value, "target value");
+    console.log(event.target.checked, "target checked");
   };
 
   useEffect(() => {
@@ -61,7 +83,11 @@ const YourDecks = () => {
         <h3>All decks </h3>
       </div>
       <div className="your__deck__filter">
-        <Dropdown className="your__deck__down">
+        <Dropdown
+          className="your__deck__down"
+          show={showCate}
+          onToggle={() => setShowCate(!showCate)}
+        >
           <Dropdown.Toggle className="your__deck__drop" id="dropdown-basic">
             Category
           </Dropdown.Toggle>
@@ -78,10 +104,10 @@ const YourDecks = () => {
               >
                 <Form.Check
                   type="checkbox"
-                  value={type.label}
+                  value={JSON.stringify(type)}
                   label={type.label}
                   onChange={handleCheckbox}
-                  checked={checks.includes(type.label)}
+                  checked={checks.type}
                 />
               </div>
             ))}
@@ -161,14 +187,14 @@ const YourDecks = () => {
           ))}
       </div>
       {tes ? (
-        loadingSort ? (
+        loadingSort || loadingFilter ? (
           <Spinner
             color="success"
             style={{ margin: "5% 45%", width: "3rem", height: "3rem" }}
           />
         ) : (
           <div className="your__deck__container">
-            {deckData.map((deck, index) => (
+            {deckData().map((deck, index) => (
               <Deck
                 key={index}
                 color={deck.color}

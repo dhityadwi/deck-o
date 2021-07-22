@@ -1,4 +1,7 @@
 const initialState = {
+  currentPass: "",
+  newPass: "",
+  changePassStat: "",
   loadings: false,
   errors: false,
   message: "",
@@ -9,6 +12,9 @@ const passwordReducer = (state = initialState, action) => {
     case "PASSWORD":
       return {
         ...state,
+        currentPass: action.payload.currentPass,
+        newPass: action.payload.newPass,
+        changePassStat: action.payload.changePassStat,
         loadings: false,
       };
 

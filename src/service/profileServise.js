@@ -35,6 +35,7 @@ export const putProfile = async (username, email) => {
       },
       body: JSON.stringify(data),
     });
+
     if (response.ok) {
       return response;
     }

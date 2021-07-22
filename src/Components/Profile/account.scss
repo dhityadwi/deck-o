@@ -13,6 +13,56 @@
   margin-top: 25vh !important;
 }
 
+.modalAlert {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 350px;
+  min-height: 200px !important;
+  text-align: center;
+  margin: 20px auto;
+  border-radius: 25px !important;
+  background: #fff;
+  margin-top: 35vh !important;
+  outline: none;
+  padding: 28px;
+
+  &__cont {
+    margin-top: 15px;
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__no {
+    padding: 14px;
+    margin: 20px;
+    border: none;
+    border-radius: 25px;
+    width: 50%;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #c78ef7;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: bolder;
+    box-shadow: 0 5px #ab6fdc;
+  }
+
+  &__no:active {
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+  }
+  &__no:focus {
+    outline: none;
+  }
+}
+
 .ReactModal__Overlay {
   background-color: rgba(0, 0, 0, 0.75) !important;
 }
@@ -59,7 +109,7 @@
 }
 
 .account {
-  margin-top: 135px;
+  margin-top: 148px;
   margin-left: 100px;
   width: 850px;
 
@@ -68,17 +118,12 @@
   }
 
   &__username {
-    &--span {
-      margin-left: 20px;
-    }
+    margin-top: 15px;
     &--name {
-      border: 0.3px solid #a5a3a3;
       width: 300px;
-      border-radius: 30px;
-      padding: 5px;
+
       & p {
-        margin: 5px;
-        padding-left: 13px;
+        margin: 0;
       }
     }
     &--box {
@@ -87,7 +132,7 @@
     &__container {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
   }
 
@@ -207,7 +252,7 @@
     line-height: 21px;
     font-weight: bolder;
     box-shadow: 0 5px #ab6fdc;
-    margin-left: 13vh;
+    margin-left: 12vh;
   }
   &__btn:active {
     box-shadow: none;

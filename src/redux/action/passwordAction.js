@@ -6,9 +6,14 @@ export const isPasswordStart = () => {
   };
 };
 
-export const isPassword = () => {
+export const isPassword = (currentPass, newPass, changePassStat) => {
   return {
     type: "PASSWORD",
+    payload: {
+      currentPass,
+      newPass,
+      changePassStat,
+    },
   };
 };
 
@@ -29,7 +34,9 @@ export const passwordAsyn = (current_password, password) => {
       .then((response) => {
         console.log(response, "respons");
 
-        dispatch(isPassword(current_password, password));
+        const { status } = response;
+        console.log(status, "stat");
+        dispatch(isPassword(current_password, password, status));
       })
       .catch((error) => {
         console.log(error.message);

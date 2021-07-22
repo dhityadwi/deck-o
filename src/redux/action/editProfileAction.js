@@ -6,12 +6,13 @@ export const isPutProfileStart = () => {
   };
 };
 
-export const isPutProfile = (username, email) => {
+export const isPutProfile = (username, email, editProfStat) => {
   return {
     type: "PUT_PROFILE",
     payload: {
       username,
       email,
+      editProfStat,
     },
   };
 };
@@ -33,7 +34,9 @@ export const putProfileAsync = (username, email) => {
       .then((response) => {
         console.log(response);
 
-        dispatch(isPutProfile(username, email));
+        const { status } = response;
+        console.log(status, "stat");
+        dispatch(isPutProfile(username, email, status));
       })
       .catch((error) => {
         console.log(error.message);

@@ -1,6 +1,7 @@
 const initialState = {
   username: "",
   email: "",
+  editProfStat: "",
   loading: false,
   error: false,
   message: "",
@@ -13,6 +14,7 @@ const putProfileReducer = (state = initialState, action) => {
         ...state,
         email: action.payload.email,
         username: action.payload.username,
+        editProfStat: action.payload.editProfStat,
         loading: false,
       };
     case "PUT_PROFILE/START":

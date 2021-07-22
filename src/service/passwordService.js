@@ -15,6 +15,7 @@ export const putPassword = async (current_password, password) => {
       },
       body: JSON.stringify(data),
     });
+
     if (response.ok) {
       return response;
     }
