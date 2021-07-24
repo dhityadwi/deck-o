@@ -1,18 +1,18 @@
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { Modal } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { withRouter, Link, useHistory } from 'react-router-dom';
-import Deck from '../../Components/Deck/Deck';
-import Header from '../../Components/Header/Header';
-import DetailPage from '../../Components/YourDecks/DetailPage/DetailPage';
-import { getDecksByUser } from '../../redux/action/deckAction';
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { withRouter, Link, useHistory } from "react-router-dom";
+import Deck from "../../Components/Deck/Deck";
+import Header from "../../Components/Header/Header";
+import DetailPage from "../../Components/YourDecks/DetailPage/DetailPage";
+import { getDecksByUser } from "../../redux/action/deckAction";
 import {
   getResultTest,
   setId,
   takeTestMultiple,
-} from '../../redux/action/testAction';
+} from "../../redux/action/testAction";
 
 const ChooseDeck = ({ history }) => {
   const dispatch = useDispatch();
@@ -23,9 +23,9 @@ const ChooseDeck = ({ history }) => {
   const { resultTest } = useSelector((state) => state.test);
 
   const [smShow, setSmShow] = useState(false);
-  const [quizType, setQuizType] = useState('');
-  const [deck_id, setDeck_id] = useState('');
-  const [nameCategory, setNameCategory] = useState('');
+  const [quizType, setQuizType] = useState("");
+  const [deck_id, setDeck_id] = useState("");
+  const [nameCategory, setNameCategory] = useState("");
 
   const showModal = (show) => {
     setSmShow(show);
@@ -45,21 +45,21 @@ const ChooseDeck = ({ history }) => {
     // dispatch(takeTestMultiple({ decksId: deck_id }));
   };
 
-  console.log(deck_id, ' deck id');
+  // console.log(deck_id, ' deck id');
 
   useEffect(() => {
     dispatch(getDecksByUser(user_id));
     dispatch(getResultTest(deck_id));
   }, []);
 
-  console.log(deck_id);
+  // console.log(deck_id);
   return (
     <DetailPage>
       <div>
         {!deckByUser ? (
-          <h1 style={{ marginTop: '150px' }}>Loading...</h1>
+          <h1 style={{ marginTop: "150px" }}>Loading...</h1>
         ) : (
-          <div className="row  mb-3 mt-10" style={{ marginTop: '150px' }}>
+          <div className="row  mb-3 mt-10" style={{ marginTop: "150px" }}>
             <Modal
               size="sm"
               show={smShow}
@@ -72,16 +72,16 @@ const ChooseDeck = ({ history }) => {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: "flex" }}>
                   <button
-                    style={{ flex: '1', width: '50%' }}
+                    style={{ flex: "1", width: "50%" }}
                     onClick={() => handleMultiple(deck_id)}
                   >
                     Multiple
                   </button>
 
                   <button
-                    style={{ flex: '1', width: '50%' }}
+                    style={{ flex: "1", width: "50%" }}
                     onClick={handleTrueFalse}
                   >
                     True or false
@@ -92,7 +92,7 @@ const ChooseDeck = ({ history }) => {
             <div className="col-lg-10 col-md-12 mx-auto">
               <div className="container-fluid">
                 <div className="text-center mb-3">
-                  <div style={{ position: 'absolute' }}>
+                  <div style={{ position: "absolute" }}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                     <span className="ml-2">BACK</span>
                   </div>
@@ -116,7 +116,7 @@ const ChooseDeck = ({ history }) => {
                           title={deck.title}
                           deck_id={deck._id}
                           username={deck.user_Id.username}
-                          type={'test'}
+                          type={"test"}
                           smShow={smShow}
                           showModal={showModal}
                           currentPath={window.location.pathname}

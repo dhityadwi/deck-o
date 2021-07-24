@@ -1,20 +1,20 @@
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Deck from '../../Components/Deck/Deck';
-import Header from '../../Components/Header/Header';
-import DetailPage from '../../Components/YourDecks/DetailPage/DetailPage';
-import { ProgressBar } from 'react-bootstrap';
-import assets from '../../assets';
-import styles from './make-test.scss';
-import { ButtonLabel } from '../../Components/Button';
-import { withRouter } from 'react-router-dom';
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Deck from "../../Components/Deck/Deck";
+import Header from "../../Components/Header/Header";
+import DetailPage from "../../Components/YourDecks/DetailPage/DetailPage";
+import { ProgressBar } from "react-bootstrap";
+import assets from "../../assets";
+import styles from "./make-test.scss";
+import { ButtonLabel } from "../../Components/Button";
+import { withRouter } from "react-router-dom";
 import {
   setId,
   nextTestMultiple,
   getResultTest,
-} from '../../redux/action/testAction';
+} from "../../redux/action/testAction";
 
 const Multiple = ({ history }) => {
   const dispatch = useDispatch();
@@ -38,13 +38,13 @@ const Multiple = ({ history }) => {
   //     });
   //   }, 2500);
   // }
-  console.log(trackQuiz);
+  // console.log(trackQuiz);
 
   useEffect(() => {
     if (trackQuiz === totalQuiz) {
       setTimeout(() => {
         history.push(`/home/test/result/${testDeckId}`, {
-          deckId: '',
+          deckId: "",
           test: 22,
         });
       }, 2500);
@@ -55,17 +55,17 @@ const Multiple = ({ history }) => {
     <DetailPage>
       <div>
         {loading ? (
-          <h1 style={{ textAlign: 'center', marginTop: '150px' }}>
+          <h1 style={{ textAlign: "center", marginTop: "150px" }}>
             Loading...
           </h1>
         ) : testQuiz ? (
-          <div className="row  mb-3" style={{ marginTop: '150px' }}>
+          <div className="row  mb-3" style={{ marginTop: "150px" }}>
             <div className="col-lg-10 col-md-10 mx-auto">
               <div className="container-fluid">
                 <div className="text-center mb-3">
                   <div
-                    style={{ position: 'absolute' }}
-                    onClick={() => history.push('/home/test/choose-deck')}
+                    style={{ position: "absolute" }}
+                    onClick={() => history.push("/home/test/choose-deck")}
                   >
                     <FontAwesomeIcon icon={faArrowLeft} />
                     <span className="ml-2">BACK</span>
@@ -74,7 +74,7 @@ const Multiple = ({ history }) => {
                     Deck Name :
                     {testQuiz && testQuiz.dtDeck[0].title
                       ? testQuiz.dtDeck[0].title
-                      : 'No title'}
+                      : "No title"}
                   </p>
                 </div>
                 <div className="row">
@@ -98,8 +98,8 @@ const Multiple = ({ history }) => {
                                 borderRadius: 10,
                                 borderWidth: 1,
                                 borderColor:
-                                  answer === 'b' ? '#ab6fdc' : '#ddd',
-                                cursor: 'pointer',
+                                  answer === "b" ? "#ab6fdc" : "#ddd",
+                                cursor: "pointer",
                               }}
                               onClick={() => {
                                 postAnswer(
@@ -126,7 +126,7 @@ const Multiple = ({ history }) => {
             </div>
           </div>
         ) : (
-          'loading...'
+          "loading..."
         )}
       </div>
     </DetailPage>

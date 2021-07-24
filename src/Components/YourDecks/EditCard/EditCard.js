@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './editCard.scss';
-import { FiPlusCircle } from 'react-icons/fi';
-import Card from '../../Card/Card';
-import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
-import Bar from '../../Bar';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./editCard.scss";
+import { FiPlusCircle } from "react-icons/fi";
+import Card from "../../Card/Card";
+import { Link, useHistory, useParams, useLocation } from "react-router-dom";
+import Bar from "../../Bar";
 
-import { getCardsByDeckId } from '../../../redux/action/cardAction';
+import { getCardsByDeckId } from "../../../redux/action/cardAction";
 
 const NewCard = () => {
   const dispatch = useDispatch();
@@ -19,45 +19,43 @@ const NewCard = () => {
   const [cardForm, setCardForm] = useState([]);
 
   const card = {
-    indeks: '',
-    term: '',
-    explanation: '',
-    explanation1: '',
-    explanation2: '',
-    explanation3: '',
-    image: '',
-    imageName: '',
+    indeks: "",
+    term: "",
+    explanation: "",
+    explanation1: "",
+    explanation2: "",
+    explanation3: "",
+    image: "",
+    imageName: "",
   };
   // const dataEdit = useSelector((state) => state?.card.cardsByDeckId);
   // console.log(dataEdit && dataEdit[0][0].term);
   // console.log(dataEdit && dataEdit[0][1][0].explane1);
 
-  console.log(location.state.editCardData);
-
   const handleSubmit = () => {
     cardForm.map((item, index) => {
       let formdata = new FormData();
 
-      if (item.image === '') {
-        formdata.append('decksId', createdDeck._id);
-        formdata.append('term', item.term);
-        formdata.append('explanation1', item.explanation);
-        formdata.append('explanation2', item.explanation1);
-        formdata.append('explanation3', item.explanation2);
-        formdata.append('explanation4', item.explanation3);
+      if (item.image === "") {
+        formdata.append("decksId", createdDeck._id);
+        formdata.append("term", item.term);
+        formdata.append("explanation1", item.explanation);
+        formdata.append("explanation2", item.explanation1);
+        formdata.append("explanation3", item.explanation2);
+        formdata.append("explanation4", item.explanation3);
       } else {
-        formdata.append('image', item.image, item.imageName);
-        formdata.append('decksId', createdDeck._id);
-        formdata.append('term', item.term);
-        formdata.append('explanation1', item.explanation);
-        formdata.append('explanation2', item.explanation1);
-        formdata.append('explanation3', item.explanation2);
-        formdata.append('explanation4', item.explanation3);
+        formdata.append("image", item.image, item.imageName);
+        formdata.append("decksId", createdDeck._id);
+        formdata.append("term", item.term);
+        formdata.append("explanation1", item.explanation);
+        formdata.append("explanation2", item.explanation1);
+        formdata.append("explanation3", item.explanation2);
+        formdata.append("explanation4", item.explanation3);
       }
 
       // dispatch(createCard(formdata, cardForm.length));
     });
-    history.push('/home');
+    history.push("/home");
   };
 
   const addCard = () => {
@@ -122,7 +120,7 @@ const NewCard = () => {
   const deleteImage = (index) => {
     const newImage = [...cardForm];
     newImage[index].image = null;
-    newImage[index].imageName = '';
+    newImage[index].imageName = "";
     setCardForm(newImage);
   };
 
@@ -130,19 +128,17 @@ const NewCard = () => {
     dispatch(getCardsByDeckId(id));
   }, []);
 
-  console.log(location.state.editCardData[0][0].term);
-
   return (
     <div>
       {loading ? (
-        'Loading...'
+        "Loading..."
       ) : (
-        <div className="newCard-container" style={{ marginTop: '120px' }}>
+        <div className="newCard-container" style={{ marginTop: "120px" }}>
           <Bar />
-          <h2 style={{ marginTop: '50px' }}>List of Card</h2>
+          <h2 style={{ marginTop: "50px" }}>List of Card</h2>
           {location.state.editCardData &&
           location.state.editCardData.length === 0
-            ? 'Card for this deck is still empty. Lets create new one'
+            ? "Card for this deck is still empty. Lets create new one"
             : location.state.editCardData.map((item, index) => {
                 return (
                   <Card
@@ -187,9 +183,9 @@ const NewCard = () => {
               size="40"
               color="white"
               style={{
-                margin: 'auto',
-                background: '#F4AA27',
-                borderRadius: '50%',
+                margin: "auto",
+                background: "#F4AA27",
+                borderRadius: "50%",
               }}
               onClick={addCard}
             />

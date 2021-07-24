@@ -22,19 +22,13 @@ const YourDecks = () => {
   const [page, setPage] = useState(2);
   const [tes, setTes] = useState(true);
   // const { data } = useSelector((state) => state.category);
-  console.log(checks, "category check");
 
   const { data, loadingSort } = useSelector((state) => state.sort);
   const { filter, loadingFilter } = useSelector((state) => state.filter);
 
-  console.log(filter, "data filter cat");
-  console.log(data, "ini data sort");
-
   const [showCate, setShowCate] = useState(false);
 
   const [deckMapping, setDeckMapping] = useState();
-
-  console.log(deckMapping + " deck mapping");
 
   const deckData = () => {
     if (data.length !== 0 || filter.length !== 0) {
@@ -68,8 +62,6 @@ const YourDecks = () => {
         checks.filter((item) => item !== JSON.parse(event.target.value))
       );
     }
-    console.log(event.target.value, "target value");
-    console.log(event.target.checked, "target checked");
   };
 
   useEffect(() => {

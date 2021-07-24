@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import './session.scss';
-import emot from '../../assets/image/emot-session.png';
-import { Progress } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProgressDecksByUser } from '../../redux/action/deckAction';
-import { useHistory } from 'react-router-dom';
-import { Carousel } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import "./session.scss";
+import emot from "../../assets/image/emot-session.png";
+import { Progress } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getProgressDecksByUser } from "../../redux/action/deckAction";
+import { useHistory } from "react-router-dom";
+import { Carousel } from "react-bootstrap";
 
 const Session = ({ onClick }) => {
   const dispatch = useDispatch();
@@ -15,10 +15,10 @@ const Session = ({ onClick }) => {
 
   useEffect(() => {
     dispatch(getProgressDecksByUser());
-    console.log(deckProgressByUser[0]);
+    // console.log(deckProgressByUser[0]);
   }, []);
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: "flex" }}>
       {deckProgressByUser[0] ? (
         deckProgressByUser.length > 0 &&
         deckProgressByUser.slice(0, 3).map((item) => (
@@ -29,7 +29,7 @@ const Session = ({ onClick }) => {
                 <Progress
                   color="warning"
                   style={{
-                    borderRadius: '44px',
+                    borderRadius: "44px",
                   }}
                   value={item.progress * 100}
                 />

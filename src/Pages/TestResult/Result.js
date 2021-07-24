@@ -1,14 +1,14 @@
-import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect } from 'react';
-import { ProgressBar } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { withRouter, useParams, Link } from 'react-router-dom';
-import assets from '../../assets';
-import { ButtonLabel } from '../../Components/Button';
-import CardAnswer from '../../Components/CardAnswer';
-import DetailPage from '../../Components/YourDecks/DetailPage/DetailPage';
-import { getResultTest } from '../../redux/action/testAction';
+import { faArrowLeft, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from "react";
+import { ProgressBar } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { withRouter, useParams, Link } from "react-router-dom";
+import assets from "../../assets";
+import { ButtonLabel } from "../../Components/Button";
+import CardAnswer from "../../Components/CardAnswer";
+import DetailPage from "../../Components/YourDecks/DetailPage/DetailPage";
+import { getResultTest } from "../../redux/action/testAction";
 
 const TestResult = ({ history }) => {
   const dispatch = useDispatch();
@@ -22,19 +22,19 @@ const TestResult = ({ history }) => {
 
   useEffect(() => {
     dispatch(getResultTest(id));
-    console.log(id + ' params');
-    console.log(resultTest.dtResultDecksTest, ' 1');
+    // console.log(id + ' params');
+    // console.log(resultTest.dtResultDecksTest, ' 1');
   }, []);
 
   useEffect(() => {
-    console.log(resultTest.dtResultDecksTest, ' 2');
+    console.log(resultTest.dtResultDecksTest, " 2");
   }, [resultTest, loading]);
 
   return (
     <DetailPage>
       <div>
         {!resultTest.dtResultDecksTest && !resultTest.dtResultTakeTest ? (
-          <h1 style={{ textAlign: 'center', marginTop: '150px' }}>
+          <h1 style={{ textAlign: "center", marginTop: "150px" }}>
             Loading...
           </h1>
         ) : (
@@ -43,8 +43,8 @@ const TestResult = ({ history }) => {
               <div className="container-fluid">
                 <div className="text-center mb-3">
                   <div
-                    style={{ position: 'absolute', right: 0 }}
-                    onClick={() => history.push('/home/test/choose-deck')}
+                    style={{ position: "absolute", right: 0 }}
+                    onClick={() => history.push("/home/test/choose-deck")}
                   >
                     <FontAwesomeIcon icon={faTimes} />
                     <span className="ml-2">DONE</span>
@@ -58,13 +58,13 @@ const TestResult = ({ history }) => {
                     alt="Group-4398"
                     border="0"
                   />
-                  <h4 className="mb-0 mt-2" style={{ color: '#AB6FDC' }}>
+                  <h4 className="mb-0 mt-2" style={{ color: "#AB6FDC" }}>
                     {resultTest?.dtResultDecksTest.length > 0
                       ? Math.floor(resultTest?.dtResultDecksTest[0].score)
-                      : 'loading...'}
+                      : "loading..."}
                     {/* {Math.floor(resultTest?.dtResultDecksTest[0].score} */}
                   </h4>
-                  <p style={{ color: '#898B8F' }}>Youre Score</p>
+                  <p style={{ color: "#898B8F" }}>Youre Score</p>
                   {/* <h5 className="mt-3 text-bold">
                     Ooh ooh, don’t forget to study
                   </h5>
@@ -93,7 +93,7 @@ const TestResult = ({ history }) => {
                             <CardAnswer item={data} />
                           </div>
                         ))
-                      : 'loading...'}
+                      : "loading..."}
                   </div>
                 </div>
               </div>
