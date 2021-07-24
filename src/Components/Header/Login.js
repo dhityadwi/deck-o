@@ -75,7 +75,7 @@ const Login = () => {
             <ReactFacebookLogin className="login__app__fb" />
             <img src={fb} alt="fb" />
           </div> */}
-          <p>or</p>
+          {/* <p>or</p> */}
           <form onSubmit={handleLogin}>
             <input
               placeholder="Email"
