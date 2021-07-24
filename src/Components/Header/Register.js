@@ -62,14 +62,14 @@ const Register = () => {
       >
         <div className="reg__app">
           <h1>Sign up to get started</h1>
-          <div className="reg__app__log">
+          {/* <div className="reg__app__log">
             <GoogleLogin
               buttonText="Sign up with Google"
               className="reg__app__goog"
             />
             <ReactFacebookLogin />
             <img src={fb} alt="fb" />
-          </div>
+          </div> */}
           <p>or</p>
           <form onSubmit={handleReg}>
             <input

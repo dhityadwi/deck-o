@@ -36,7 +36,10 @@ export const regisUser = async (username, email, password) => {
       body: JSON.stringify(data),
     });
 
-    return response.json();
+    if (response.ok) {
+      return response;
+    }
+    throw new Error("Email Already Used.");
   } catch (error) {
     throw error;
   }

@@ -34,7 +34,7 @@ const ModalSwipe = ({ isOpen, type, id, username }) => {
         <Link
           to={{
             pathname: `/detail/${id}`,
-            state: { username: username, modal: 'modal wlal' },
+            state: { username },
           }}
         >
           <button

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import GoogleLogin from 'react-google-login';
-import ModalLogin from 'react-modal';
-import '../../assets/styles/Login.scss';
-import ReactFacebookLogin from 'react-facebook-login';
-import fb from '../../assets/img/fb.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { isLogin, loginAsync } from '../../redux/action/loginAction';
-import { useHistory } from 'react-router-dom';
-import Register from './Register';
+import React, { useEffect, useState } from "react";
+import GoogleLogin from "react-google-login";
+import ModalLogin from "react-modal";
+import "../../assets/styles/Login.scss";
+import ReactFacebookLogin from "react-facebook-login";
+import fb from "../../assets/img/fb.png";
+import { useDispatch, useSelector } from "react-redux";
+import { isLogin, loginAsync } from "../../redux/action/loginAction";
+import { useHistory } from "react-router-dom";
+import Register from "./Register";
 
-ModalLogin.setAppElement('#root');
+ModalLogin.setAppElement("#root");
 
 const Login = () => {
   const [loginModal, setLoginModal] = useState(false);
 
-  const [inputPass, setInputPass] = useState('');
-  const [inputEmail, setInputEmail] = useState('');
+  const [inputPass, setInputPass] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
 
   const dispatch = useDispatch();
 
@@ -51,7 +51,7 @@ const Login = () => {
   useEffect(() => {
     if (loginStat === 200) {
       setLoginModal(false);
-      historyHome.push('/home');
+      historyHome.push("/home");
     }
   }, [loginStat, historyHome]);
 
@@ -67,14 +67,14 @@ const Login = () => {
       >
         <div className="login__app">
           <h1>Login in to your account</h1>
-          <div className="login__app__log">
+          {/* <div className="login__app__log">
             <GoogleLogin
               buttonText="Sign in with Google"
               className="login__app__goog"
             />
             <ReactFacebookLogin className="login__app__fb" />
             <img src={fb} alt="fb" />
-          </div>
+          </div> */}
           <p>or</p>
           <form onSubmit={handleLogin}>
             <input
@@ -105,7 +105,7 @@ const Login = () => {
               </button>
             )}
             <p>
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <span>
                 <Register />
               </span>
