@@ -41,6 +41,7 @@ export const ButtonLabel = ({
         paddingLeft: 20,
         paddingRight: 20,
         fontWeight: 'bold',
+
         backgroundColor,
       }}
     >

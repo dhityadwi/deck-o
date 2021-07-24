@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import "./account.scss";
-import ModalChangePass from "react-modal";
-import ModalChangeEmail from "react-modal";
-import ModalAlert from "react-modal";
-import ModalAlertPass from "react-modal";
-import { error } from "jquery";
-import { profileAsync } from "../../redux/action/profileAction";
-import { putProfileAsync } from "../../redux/action/editProfileAction";
-import { passwordAsyn } from "../../redux/action/passwordAction";
-import { Spinner } from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import './account.scss';
+import ModalChangePass from 'react-modal';
+import ModalChangeEmail from 'react-modal';
+import ModalAlert from 'react-modal';
+import ModalAlertPass from 'react-modal';
+import { error } from 'jquery';
+import { profileAsync } from '../../redux/action/profileAction';
+import { putProfileAsync } from '../../redux/action/editProfileAction';
+import { passwordAsyn } from '../../redux/action/passwordAction';
+import { Spinner } from 'reactstrap';
 
 const Account = () => {
   const username = useSelector((state) => state.profile.username);
@@ -17,18 +17,18 @@ const Account = () => {
   const { loading, error } = useSelector((state) => state.editProfile);
   const { loadings, errors } = useSelector((state) => state.password);
   const dispatch = useDispatch();
-
+  //modal
   const [changePassModal, setChangesPassModal] = useState(false);
   const [changeEmailModal, setChangesEmailModal] = useState(false);
   const [changeAlertModal, setChangesAlertModal] = useState(false);
   const [changeAlertModalPass, setChangesAlertModalPass] = useState(false);
 
-  const [passCurrent, setPassCurrent] = useState("");
-  const [passNew, setPassNew] = useState("");
+  const [passCurrent, setPassCurrent] = useState('');
+  const [passNew, setPassNew] = useState('');
 
-  const [newEmail, setNewEmail] = useState("");
+  const [newEmail, setNewEmail] = useState('');
 
-  const [newUser, setNewUser] = useState("");
+  const [newUser, setNewUser] = useState('');
 
   // Modal Pass
   const openModalPass = () => {
@@ -121,9 +121,9 @@ const Account = () => {
                 <Spinner
                   color="warning"
                   style={{
-                    margin: "5% 10%",
-                    width: "1.5rem",
-                    height: "1.5rem",
+                    margin: '5% 10%',
+                    width: '1.5rem',
+                    height: '1.5rem',
                   }}
                 />
               ) : (
@@ -180,15 +180,15 @@ const Account = () => {
               <Spinner
                 color="warning"
                 style={{
-                  margin: "5% 25%",
-                  width: "1.5rem",
-                  height: "1.5rem",
+                  margin: '5% 25%',
+                  width: '1.5rem',
+                  height: '1.5rem',
                 }}
               />
             ) : (
               <p>
-                Your email address is{" "}
-                <span style={{ fontWeight: "bolder" }}>{email}</span>
+                Your email address is{' '}
+                <span style={{ fontWeight: 'bolder' }}>{email}</span>
               </p>
             )}
           </div>

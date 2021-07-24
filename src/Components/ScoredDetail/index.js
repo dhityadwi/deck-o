@@ -32,12 +32,11 @@ const ScoredDetail = ({ score, resultTest }) => {
             <h5 className={'mt-2'} style={{ color: '#3E3E3E' }}>
               You missed 8 out of 20 questions
             </h5> */}
-            <ButtonLabel
+            {/* <ButtonLabel
               title="Retake the test"
               color="#fff"
               className="w-100 pt-2 pb-2 border-bottom-purple"
-            />
-
+            /> */}
             {resultTest?.dtResultTakeTest.map((data) => (
               <CardAnswer item={data} />
             ))}

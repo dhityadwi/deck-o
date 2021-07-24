@@ -1,13 +1,13 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import deko from "../../assets/image/logo.png";
-import "./header.scss";
-import user from "../../assets/image/user.svg";
-import folder from "../../assets/image/folder.svg";
-import logout from "../../assets/image/logout.svg";
-import { useEffect } from "react";
-import { profileAsync } from "../../redux/action/profileAction";
+import Dropdown from 'react-bootstrap/Dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import deko from '../../assets/image/logo.png';
+import './header.scss';
+import user from '../../assets/image/user.svg';
+import folder from '../../assets/image/folder.svg';
+import logout from '../../assets/image/logout.svg';
+import { useEffect } from 'react';
+import { profileAsync } from '../../redux/action/profileAction';
 
 const Header = () => {
   const username = useSelector((state) => state.profile.username);
@@ -16,7 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const hanldeLogout = () => {
-    historyLanding.push("/");
+    historyLanding.push('/');
     const store = window.localStorage;
     store.clear();
 
@@ -26,7 +26,7 @@ const Header = () => {
   useEffect(() => {
     dispatch(profileAsync());
   }, []);
-  
+
   return (
     <nav className="nav">
       <label className="nav__icon">
