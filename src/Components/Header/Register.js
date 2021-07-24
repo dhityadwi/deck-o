@@ -70,7 +70,7 @@ const Register = () => {
             <ReactFacebookLogin />
             <img src={fb} alt="fb" />
           </div> */}
-          <p>or</p>
+          {/* <p>or</p> */}
           <form onSubmit={handleReg}>
             <input
               placeholder="Username"
